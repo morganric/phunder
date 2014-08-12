@@ -1,3 +1,7 @@
+ENV["DOMAIN_NAME"] = "www.phunderapp.com"
+ENV['PUBLISHABLE_KEY'] = "pk_test_4Y3esELE0IbGEDWmaauZUwOh"
+ENV['SECRET_KEY'] = "sk_test_4Y3e9qy1NaVmuIwagWT8Bb55"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -20,7 +24,7 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
