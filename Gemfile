@@ -37,6 +37,7 @@ group :development do
 end
 group :production, :test do
   gem 'pg'
+  gem 'rails_12factor'
 end
 group :test do
   gem 'capybara'
