@@ -15,6 +15,10 @@ gem 'devise'
 gem 'pundit'
 gem 'simple_form'
 gem 'thin'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'carrierwave'
+gem 'cloudinary'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19]
@@ -27,6 +31,7 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
+  gem 'debugger'
 end
 group :development, :test do
   gem 'factory_girl_rails'

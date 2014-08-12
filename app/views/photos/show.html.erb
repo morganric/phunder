@@ -1,0 +1,9 @@
+<h1><%= @photo.title %></h1>
+
+<hr/>
+
+
+<%= image_tag(@photo.image.url()) %>
+
+<%= @photo.user %>
+<%= link_to @photo.campaign.name, @photo.campaign  %>

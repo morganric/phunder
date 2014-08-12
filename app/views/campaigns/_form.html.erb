@@ -1,0 +1,23 @@
+<div class="well form-inline" %>
+  <%= simple_form_for(@campaign) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :name %>
+      <%= f.input :description %>
+      <%= f.input :user_id, as: :hidden %>
+      <%= f.input :target %>
+      <%= f.input :live, as: :hidden %>
+      <%= f.input :price %>
+      <%= f.label :image, "Image" %>
+      <%= f.file_field :image %>
+      <%= f.label :banner, "Banner" %>
+      <%= f.file_field :banner %>
+    </div>
+    <hr/>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+
+</div>

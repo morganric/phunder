@@ -1,2 +1,5 @@
-<h3>Welcome</h3>
-<p><%= link_to 'Users:', users_path %> <%= User.count %> registered</p>
+<h1>Welcome to Phunder</h1>
+<% @campaigns.each do |campaign| %>
+	<h3><%= link_to campaign.name.capitalize, campaign %></h3>
+	<%= link_to image_tag(campaign.image.url(:square), :class => "pull-left"), campaign %>
+<% end %>

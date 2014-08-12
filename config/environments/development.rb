@@ -1,3 +1,6 @@
+ENV['PUBLISHABLE_KEY'] = "pk_test_4Y3esELE0IbGEDWmaauZUwOh"
+ENV['SECRET_KEY'] = "sk_test_4Y3e9qy1NaVmuIwagWT8Bb55"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
