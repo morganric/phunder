@@ -35,8 +35,6 @@ group :development do
   gem 'rb-inotify', :require=>false
   gem 'debugger'
   gem 'sqlite3'
-  gem 'factory_girl_rails'
-  gem 'rspec-rails'
 end
 group :production, :test do
   gem 'pg'
