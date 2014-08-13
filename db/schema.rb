@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813173000) do
+ActiveRecord::Schema.define(version: 20140813194739) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20140813173000) do
     t.string   "name"
     t.integer  "role"
     t.string   "provider"
-    t.integer  "uid"
+    t.string   "uid"
     t.string   "stripe_secret_key"
     t.string   "stripe_publishable_key"
     t.string   "fb_uid"
