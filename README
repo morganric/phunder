@@ -19,6 +19,7 @@ option  Web server for production?
 choose  Enter your selection: [thin]
 option  Database used in development?
 choose  Enter your selection: [sqlite]
+choose  Enter your selection: [postgresql]
 option  Template engine?
 choose  Enter your selection: [erb]
 option  Test framework?

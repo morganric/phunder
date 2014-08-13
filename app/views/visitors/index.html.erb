@@ -1,17 +1,19 @@
+
 <h1>
 	Welcome to Phunder App
 	<br/>
-	<small>A fast, secure, simple application for fundraising campaigns...</small>
+	<small>A simple application for fundraising campaigns...</small>
 </h1>
-<ol>
-	<h3><li>Signup with your Facebook account</li>
-	<li>Connect with your <a href="http://www.stripe.com" style="text-decoration:underline;" targe="_blank">Stripe</a> account</li>
-	<li>Build your fun photo fundraising campaign</li>
-	</h3>
-</ol>
-
+<div class="well">
+	<ol>
+		<h3><li>Signup with your Facebook account</li>
+		<li>Connect with your <a href="http://www.stripe.com" style="text-decoration:underline;" targe="_blank">Stripe</a> account</li>
+		<li>Build your fun photo fundraising campaign</li>
+		</h3>
+	</ol>
+</div>
 <hr/>
-<ul class="clearfix">
+<ul class="clearfix col-md-12">
 	<% @campaigns.reverse.each do |campaign| %>
 		<li class="row">
 			<h2><%= link_to campaign.name.capitalize, campaign %></h2>

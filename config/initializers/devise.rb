@@ -4,6 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
+
   # config.secret_key = '9b233a5ec0c497759700b1bc6e5adca7ae6266af0bc240d0241f2006e0744aa2e5d561b08a74b13303ca14763efffd491e0fec285352e0d5e45842394300a574'
 
   # ==> Mailer Configuration
@@ -97,6 +98,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
+
   # config.pepper = 'f5a6b2e964a567dd3a99180300ab0efe199b184650ebec2b951d4894530a19264fc63cabc2feee2105dab08cd2cbd2599753916c27e534b6c9c3f67eafe50f86'
 
   # ==> Configuration for :confirmable
@@ -231,6 +233,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
+
   require "omniauth"
   require "omniauth-facebook"
   require "omniauth-stripe-connect"
@@ -238,6 +241,7 @@ Devise.setup do |config|
   config.omniauth :stripe_connect, ENV['STRIPE_CONNECT_CLIENT_ID'], ENV['STRIPE_SECRET'], :scope => 'read_write'
   config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret, :strategy_class => OmniAuth::Strategies::Facebook,
             :scope => 'email, publish_actions, manage_pages, status_update'
+
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

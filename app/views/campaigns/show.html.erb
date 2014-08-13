@@ -65,7 +65,7 @@
       <%= link_to image_tag(photo.image.url(:square), :class => "img-rounded pull-left"), photo %>
       <br/>
       <p class="pull-left">
-        <h3><%= link_to photo.title, photo %></h3>
+        <h3><%= link_to photo.title|| "View", photo %></h3>
       </p>
     </div>
 

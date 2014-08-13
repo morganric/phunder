@@ -40,5 +40,6 @@ class @GoogleAnalytics
 
   @analyticsId: ->
     'group :production do'
+    'UA-53711043-1'
 
 GoogleAnalytics.load()
