@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813123601) do
+ActiveRecord::Schema.define(version: 20140813171819) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140813123601) do
     t.integer  "uid"
     t.string   "stripe_secret_key"
     t.string   "stripe_publishable_key"
+    t.string   "fb_uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
