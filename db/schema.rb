@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140812155135) do
+ActiveRecord::Schema.define(version: 20140813123601) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -51,9 +51,14 @@ ActiveRecord::Schema.define(version: 20140812155135) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "role"
+    t.string   "provider"
+    t.integer  "uid"
+    t.string   "stripe_secret_key"
+    t.string   "stripe_publishable_key"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["stripe_publishable_key", "stripe_secret_key"], name: "index_users_on_stripe_publishable_key_and_stripe_secret_key", unique: true
 
 end

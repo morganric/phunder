@@ -7,13 +7,10 @@
     </p>
     </span>
 <br/>
-  by <small>
-  <%= @campaign.user.name %>
-
+ <small>
+  by <%= @campaign.user.name %>
   </small>
 </h1>
-
-<hr/>
 
 <section class="clearfix row">
 <div class="pull-left col-md-4">
@@ -22,49 +19,57 @@
 
 <div class="pull-left col-md-8">
   <p class="well">
-  <%= @campaign.description %>
+  <%= truncate(@campaign.description, length: 500) %>
   </p>
 
   <%= link_to "Edit", edit_campaign_path(@campaign), :class => "btn btn-default" %>
+
+  <h2>Donate
+      <span class="label label-info pull-right">
+        <strong>Price:</strong>
+        $<%= @campaign.price %>
+      </span>
+  </h2>
+
+  <div class="well">
+    <%= form_tag ({:controller => "photos", :action => "create"}), :enctype =>"multipart/form-data" do %>
+      
+      <%#= label :title, "Title : " %>
+      <%#= text_field_tag :title, '', size: 55 %>
+      <!-- <br/><br/> -->
+      <%= label :image, "Image : " %>
+      <%= file_field_tag "image" %>
+      <%= hidden_field_tag :campaign_id, @campaign.id %>
+      <%= hidden_field_tag :amount, @campaign.price %>
+      <hr/>
+
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= @campaign.user.stripe_publishable_key %>"
+              data-description="Donation to <%= @campaign.name %>"
+              data-amount="<%= @campaign.price * 100 %>"
+              data-image="<%= @campaign.image.url(:thumb) %>">
+      </script>
+    <% end %>
+  </div>
+
+
+
 </div>
 </section>
 
-<h2>Donate
-    <span class="label label-info pull-right">
-      <strong>Price:</strong>
-      $<%= @campaign.price %>
-    </span>
-</h2>
+<% if @campaign.photos !=  [] %>
+  <h2>Photos</h2>
 
-<div class="well">
-  <%= form_tag ({:controller => "photos", :action => "create"}), :enctype =>"multipart/form-data" do %>
-    
-    <%= label :title, "Title : " %>
-    <%= text_field_tag :title, '', size: 55 %>
-    <br/><br/>
-    <%= label :image, "Image : " %>
-    <%= file_field_tag "image" %>
-    <%= hidden_field_tag :campaign_id, @campaign.id %>
-    <%= hidden_field_tag :amount, @campaign.price %>
-    <hr/>
+  <% @campaign.photos.reverse.each do |photo| %>
+    <div class="col-md-3 pull-left text-center">
+      <%= link_to image_tag(photo.image.url(:square), :class => "img-rounded pull-left"), photo %>
+      <br/>
+      <p class="pull-left">
+        <h3><%= link_to photo.title, photo %></h3>
+      </p>
+    </div>
 
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-            data-description="Donation to <%= @campaign.name %>"
-            data-amount="<%= @campaign.price * 100 %>"></script>
   <% end %>
-</div>
-
-<h2>Photos</h2>
-
-<% @campaign.photos.reverse.each do |photo| %>
-  <div class="col-md-3 pull-left text-center">
-    <%= link_to image_tag(photo.image.url(:square), :class => "img-rounded pull-left"), photo %>
-    <br/>
-    <p class="pull-left">
-      <h3><%= link_to photo.title, photo %></h3>
-    </p>
-  </div>
 
 <% end %>
 

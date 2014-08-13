@@ -10,6 +10,15 @@ class CampaignsController < ApplicationController
   # GET /campaigns/1
   # GET /campaigns/1.json
   def show
+
+      Rails.configuration.stripe = {
+      :publishable_key => @campaign.user.stripe_publishable_key || ENV['PUBLISHABLE_KEY'] ,
+      :secret_key      => @campaign.user.stripe_secret_key || ENV['SECRET_KEY']
+      }
+
+      Stripe.api_key = Rails.configuration.stripe[:secret_key]
+      # Stripe.api_key = @campaign.user.stripe_secret_key
+
   end
 
   # GET /campaigns/new

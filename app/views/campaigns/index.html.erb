@@ -1,38 +1,11 @@
 <h1>Listing campaigns</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>User</th>
-      <th>Target</th>
-      <th>Live</th>
-      <th>Price</th>
-      <th>Image</th>
-      <th>Banner</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <ul>
     <% @campaigns.each do |campaign| %>
-      <tr>
-        <td><%= campaign.name %></td>
-        <td><%= campaign.description %></td>
-        <td><%= campaign.user_id %></td>
-        <td><%= campaign.target %></td>
-        <td><%= campaign.live %></td>
-        <td><%= campaign.price %></td>
-        <td><%= campaign.image %></td>
-        <td><%= campaign.banner %></td>
-        <td><%= link_to 'Show', campaign %></td>
-        <td><%= link_to 'Edit', edit_campaign_path(campaign) %></td>
-        <td><%= link_to 'Destroy', campaign, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <li><%= link_to campaign.name, campaign %></li>
     <% end %>
-  </tbody>
-</table>
+  </ul>
+
 
 <br>
 

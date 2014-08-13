@@ -17,6 +17,9 @@ gem 'thin'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'carrierwave'
 gem 'cloudinary'
+gem 'omniauth'
+gem 'omniauth-stripe-connect'
+gem 'omniauth-facebook'
 
 group :development do
   gem 'better_errors'

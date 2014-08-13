@@ -1,5 +1,27 @@
-<h1>Welcome to Phunder</h1>
-<% @campaigns.each do |campaign| %>
-	<h3><%= link_to campaign.name.capitalize, campaign %></h3>
-	<%= link_to image_tag(campaign.image.url(:square), :class => "pull-left"), campaign %>
-<% end %>
+<h1>
+	Welcome to Phunder App
+	<br/>
+	<small>A fast, secure, simple application for fundraising campaigns...</small>
+</h1>
+<ol>
+	<h3><li>Signup with your Facebook account</li>
+	<li>Connect with your <a href="http://www.stripe.com" style="text-decoration:underline;" targe="_blank">Stripe</a> account</li>
+	<li>Build your fun photo fundraising campaign</li>
+	</h3>
+</ol>
+
+<hr/>
+<ul class="clearfix">
+	<% @campaigns.reverse.each do |campaign| %>
+		<li class="row">
+			<h2><%= link_to campaign.name.capitalize, campaign %></h2>
+			<span class="col-md-4">
+			<%= link_to image_tag(campaign.image.url(:square), :class => "pull-left"), campaign %>
+			</span>
+			<span class="col-md-8 well">
+			<%= campaign.description %>
+			</span>
+		</li>
+		<br/>
+	<% end %>
+</ul>

@@ -2,13 +2,18 @@
 <% if user_signed_in? %>
   <li><%= link_to 'Edit account', edit_user_registration_path %></li>
   <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+  <% if current_user.stripe_secret_key == "" %>
+    <li><a href="<%= user_omniauth_authorize_path(:stripe_connect) %>" ><button class="btn btn-dropbox" ><i class="fa fa-stripe"></i> Connect Stripe</button></a></li>
+  <% else %>
+    <li class=""><%= link_to 'New Campaign', new_campaign_path %></li>
+  <% end %>
 <% else %>
-  <li><%= link_to 'Sign in', new_user_session_path %></li>
-  <li><%= link_to 'Sign up', new_user_registration_path %></li>
+  <li><%#= link_to 'Sign in', new_user_session_path %></li>
+  <li><%#= link_to 'Sign up', new_user_registration_path %></li>
+  <li><a href="<%= user_omniauth_authorize_path(:facebook) %>" ><button class="btn btn-facebook" ><i class="fa fa-facebook"></i> Sign in with Facebook</button></a></li>
 <% end %>
 <% if user_signed_in? %>
   <% if current_user.admin? %>
     <li><%= link_to 'Users', users_path %></li>
   <% end %>
 <% end %>
-<li class=""><%= link_to 'New Campaign', new_campaign_path %></li>
