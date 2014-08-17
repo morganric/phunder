@@ -1,29 +1,118 @@
 
-<h1>
-	Welcome to Phunder App
-	<br/>
-	<small>A simple application for fundraising campaigns...</small>
-</h1>
-<div class="well">
-	<ol>
-		<h3><li>Signup with your Facebook account</li>
-		<li>Connect with your <a href="http://www.stripe.com" style="text-decoration:underline;" targe="_blank">Stripe</a> account</li>
-		<li>Build your fun photo fundraising campaign</li>
-		</h3>
-	</ol>
+<div class="jumbotron">
+	<h1>
+		Welcome to Phunder
+		<br/>
+		<small>A simple web app for fundraising & photos!</small>
+	</h1>
+
+	<div class="panel-group" id="accordion">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h3 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+	          1. Signup with your Facebook account
+	        </a>
+	      </h3>
+	    </div>
+	    <div id="collapseOne" class="panel-collapse collapse">
+	      <div class="panel-body">
+	        People like to know who you are, especially if your fund raising.
+	      </div>
+	    </div>
+	  </div>
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+	          2. Connect your account with <a href="http://www.stripe.com" style="text-decoration:underline;" target="_blank">Stripe</a>
+	        </a>
+	      </h4>
+	    </div>
+	    <div id="collapseTwo" class="panel-collapse collapse">
+	      <div class="panel-body">
+	        Phunder works with Stripe - a simple service for processing payments online, you'll need to add your bank account details to your stripe account before building yoru campaign.
+	      </div>
+	    </div>
+	  </div>
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+	          3. Build your fun photo fundraising campaign!
+	        </a>
+	      </h4>
+	    </div>
+	    <div id="collapseThree" class="panel-collapse collapse">
+	      <div class="panel-body">
+	        Now your ready to start fundraising, tell people a little about the campaign and maybe use an example image.
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+<div class="col-md-12">
+	<ul class="nav nav-pills" role="tablist">
+		  <li class="active"><a href="#campaigns" role="tab" data-toggle="tab">All Campaigns</a></li>
+		  <!-- <li><a href="#photos" role="tab" data-toggle="tab">Photos</a></li> -->
+	</ul>
 </div>
 <hr/>
-<ul class="clearfix col-md-12">
-	<% @campaigns.reverse.each do |campaign| %>
-		<li class="row">
-			<h2><%= link_to campaign.name.capitalize, campaign %></h2>
-			<span class="col-md-4">
-			<%= link_to image_tag(campaign.image.url(:square), :class => "pull-left"), campaign %>
-			</span>
-			<span class="col-md-8 well">
-			<%= campaign.description %>
-			</span>
-		</li>
-		<br/>
-	<% end %>
-</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="campaigns">
+			<div class="">
+				<% @campaigns.reverse.each do |campaign| %>
+					<div class="clearfix">
+						<h2 class="col-md-12">
+							<%= link_to campaign.name.capitalize, campaign %>
+							<small>by <%= campaign.user.name %></small>
+						</h2>
+						<hr/>
+						<div class="col-md-4">
+						<%= link_to image_tag(campaign.image.url(:square), :class => "pull-left img-rounded"), campaign %>
+						</div>
+						<div class="col-md-8 ">
+						<p class="well">
+						<%= truncate(campaign.description, :length => 100) %>
+						</p>
+						<ul class='clearfix' >
+						    <% campaign.photos.each do |photo| %>
+						      <%= link_to image_tag(photo.image.url(:thumb),:class => "pull-left img-rounded"), photo %>
+						    <% end %>
+						 </ul>  
+						 <br/> 
+							<div class="panel panel-default">
+						      <div class="panel-heading">
+						         <h2>
+						            Donate & Upload
+						            <span class="label label-success pull-right">
+						              <strong>Price:</strong>
+						              $<%= campaign.price %>
+						            </span>
+						          </h2>
+						      </div>
+						      <div class="panel-body">
+						      <%= form_tag ({:controller => "photos", :action => "create"}), :enctype =>"multipart/form-data" do %>
+						        <%= label :image, "Image : " %>
+						        <%= file_field_tag "image" %>
+						        <%= hidden_field_tag :campaign_id, campaign.id %>
+						        <%= hidden_field_tag :amount, campaign.price %>
+						        <br/>
+						        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+						                data-key="<%= campaign.user.stripe_publishable_key %>"
+						                data-description="Donation to <%= campaign.name %>"
+						                data-image="<%= campaign.image.url(:thumb) %>">
+						        </script>
+						      <% end %>
+						      </div>
+						    </div>
+						</div>
+					</div>
+					<br/>
+				<% end %>
+			</div>
+		</div>
+		<div class="tab-pane" id="photos">
+</div>

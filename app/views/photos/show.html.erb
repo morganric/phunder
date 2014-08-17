@@ -1,3 +1,5 @@
+
+
 <h1><%= @photo.title %></h1>
 
 <hr/>
@@ -5,5 +7,19 @@
 
 <%= image_tag(@photo.image.url()) %>
 
-<%= @photo.user %>
-<%= link_to @photo.campaign.name, @photo.campaign  %>
+<h2>
+<% if @photo.user != nil %>
+by <%= @photo.user.name %>
+<% end %>
+<small>
+for <%= link_to @photo.campaign.name, @photo.campaign  %>
+</small>
+</h2>
+
+<style type="text/css">
+  body {
+    background-image: url(<%= @photo.campaign.banner.url %>);
+    background-size: cover;
+  }
+
+</style>

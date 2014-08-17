@@ -27,6 +27,24 @@ ul li {
 	color:white;
 }
 
+main[role=main] {
+  background-color: transparent !important;
+}
+
+main div.container {
+  background-color: #eee;
+  padding-bottom: 30px;
+}
+
+body {
+  background-image: url('/assets/clouds.jpg');
+  background-size:cover;
+}
+
+.nav-pills li a {
+  color: grey;
+}
+
 /*!
  * Social Buttons for Twitter Bootstrap v1.0.0
  *
