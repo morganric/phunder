@@ -22,6 +22,7 @@ gem 'omniauth-stripe-connect'
 gem 'omniauth-facebook'
 gem 'shareable'
 gem "font-awesome-rails"
+gem "rails_autolink"
 
 group :development do
   gem 'better_errors'

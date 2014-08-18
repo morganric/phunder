@@ -1,29 +1,43 @@
 
-
-<h1>
-	<%= @photo.title %>
+<div class="clearfix col-md-12">
+	<h1>
+		<%= @photo.title %>
+		<small>
+			<% if @photo.user %>by <%= @photo.user.name %><% end %>
+			<span class="pull-right label label-success">
+				<strong>Donated</strong>
+				$ <%= @photo.paid %>
+			</span>
+		</small>
+	</h1>
+	<br/>
+	<h2>
+	<% if @photo.user != nil %>
+	by <%= @photo.user.name %>
+	<% end %>	
 	<small>
-		<% if @photo.user %>by <%= @photo.user.name %><% end %>
-		<span class="pull-right label label-success">
-			<%= @photo.paid %>
-		</span>
+	Campaign: <%= link_to @photo.campaign.name, @photo.campaign  %>
 	</small>
-</h1>
-<br/>
-<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{photo_path(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => 'New Photo: #{@photo.title} for campaign - ' }  %>
-<hr/>
+	</h2>
 
+	<div class="col-md-3">
+		<div class="panel panel-default">
+	    <div class="panel-heading">
+	           <h3>
+	              Share
+	            </h3>
+	        </div>
+	        <div class="panel-body">
+			<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{photo_path(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => 'New Photo: #{@photo.title} for campaign - ' }  %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<%= image_tag(@photo.image.url(), :class => "pull-left") %>
+	</div>
+	</div>
 
-<%= image_tag(@photo.image.url()) %>
-
-<h2>
-<% if @photo.user != nil %>
-by <%= @photo.user.name %>
-<% end %>
-<small>
-for <%= link_to @photo.campaign.name, @photo.campaign  %>
-</small>
-</h2>
+</div>
 
 <style type="text/css">
   body {

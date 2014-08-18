@@ -1,9 +1,9 @@
 
 <div class="jumbotron">
 	<h1>
-		Welcome to Phunder
+		Welcome to Phunder App
 		<br/>
-		<small>A simple web app for fundraising and photos!</small>
+		<small>A simple web app for fundraising with photos!</small>
 	</h1>
 
 	<div class="panel-group" id="accordion">
@@ -66,7 +66,7 @@
 				<% @campaigns.reverse.each do |campaign| %>
 					<div class="clearfix">
 						<h2 class="col-md-12">
-							<%= link_to campaign.name.capitalize, campaign %>
+							<%= link_to campaign.name.split.map(&:capitalize).join(' '), campaign %>
 							<small>by <%= campaign.user.name %></small>
 						</h2>
 						<hr/>

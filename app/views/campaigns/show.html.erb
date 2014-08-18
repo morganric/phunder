@@ -1,7 +1,7 @@
 
 <article style="">
   <h1>
-    <%= @campaign.name.capitalize %>
+    <%= @campaign.name.split.map(&:capitalize).join(' ') %>
       <span class="pull-right">
       <p class="label label-info">
         <strong>Target:
@@ -31,16 +31,16 @@
         <%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{campaign_path(@campaign)}'}, :twitter => {:via => 'phunderapp', :text  => 'Support the "#{@campaign.name}" campaign - ' } %>
         </div>
     </div>
+    <% if current_user && current_user.admin? || current_user = @campaign.user %>
+      <%= link_to "Edit", edit_campaign_path(@campaign), :class => "btn btn-default btn-xs" %>    
+      <%= link_to "Delete", campaign_path(@campaign), :method => "DELETE", confirm: "Are you sure?", :class => "btn btn-danger btn-xs" %>
+    <% end %>
   </div>
 
   <div class="pull-left col-md-8">
     <p class="well clearfix">
-    <%= truncate(@campaign.description, length: 500) %>
+    <%= auto_link(truncate(@campaign.description, length: 500)) %>
     <br/>
-    <% if current_user && current_user.admin? %>
-      <%= link_to "Edit", edit_campaign_path(@campaign), :class => "btn btn-default btn-xs pull-right" %>    
-      <%= link_to "Delete", campaign_path(@campaign), :method => "DELETE", confirm: "Are you sure?", :class => "btn btn-danger btn-xs pull-right" %>
-    <% end %>
     </p>
 
     <div class="panel panel-default">
@@ -77,7 +77,7 @@
       <hr/>
       <% @campaign.photos.reverse.each do |photo| %>
         <div class="col-md-3 pull-left text-center">
-          <%= link_to image_tag(photo.image.url(:square), :class => "img-rounded pull-left"), photo %>
+          <%= link_to image_tag(photo.image.url(:square), :class => "img-rounded pull-left thumbnail"), photo %>
           <br/>
           <p class="pull-left">
             <h3><%= link_to photo.title|| "View", photo %></h3>

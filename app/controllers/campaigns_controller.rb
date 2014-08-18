@@ -1,5 +1,7 @@
 class CampaignsController < ApplicationController
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
+  require 'rails_autolink'
+
 
   # GET /campaigns
   # GET /campaigns.json
