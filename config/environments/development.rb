@@ -3,10 +3,11 @@ ENV['PUBLISHABLE_KEY'] = "pk_test_4Y3esELE0IbGEDWmaauZUwOh"
 ENV['SECRET_KEY'] = "sk_test_4Y3e9qy1NaVmuIwagWT8Bb55"
 ENV["FACEBOOK_APP_ID"] = "615925001838726"
 ENV["FACEBOOK_APP_SECRET"] = "b5626bc8bb29a1c3eab42e707adbfa01"
-ENV['STRIPE_CONNECT_CLIENT_ID'] = "ca_4ZqAryTxyQ25YWSfm3ArDszV8G6tFuZ2"
+ENV['STRIPE_CONNECT_CLIENT_ID'] = "ca_4c03HGBD3dILszfzbR6BVcG0EM9LH8eS"
 ENV['STRIPE_SECRET'] = "sk_test_4Y3e9qy1NaVmuIwagWT8Bb55"
-ENV['PUBLISHABLE_KEY'] = "pk_test_4Y3esELE0IbGEDWmaauZUwOh"
-ENV['SECRET_KEY'] = "sk_test_4Y3e9qy1NaVmuIwagWT8Bb55"
+ENV['SECRET_KEY'] = "pk_test_4aDtMiNwafcCV1M32EXmOmz8"
+ENV['PUBLISHABLE_KEY'] = "sk_test_4aDtIblMHvt80zKF979KPhpM"
+
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.

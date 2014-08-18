@@ -3,7 +3,7 @@
   <h1>
     <%= @campaign.name.capitalize %>
       <span class="pull-right">
-      <p class="label label-success">
+      <p class="label label-info">
         <strong>Target:
           $<%= @campaign.target %>
         </strong>
@@ -33,13 +33,13 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">
-         <h2>
+         <h3>
             Donate & Upload
             <span class="label label-success pull-right">
               <strong>Price:</strong>
               $<%= @campaign.price %>
             </span>
-          </h2>
+          </h3>
       </div>
       <div class="panel-body">
       <%= form_tag ({:controller => "photos", :action => "create"}), :enctype =>"multipart/form-data" do %>
@@ -58,7 +58,7 @@
       </div>
   </div>
     <% if @campaign.photos !=  [] %>
-      <h2>Photos</h2>
+      <h3>Photos</h3>
       <hr/>
       <% @campaign.photos.reverse.each do |photo| %>
         <div class="col-md-3 pull-left text-center">

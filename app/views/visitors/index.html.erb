@@ -3,7 +3,7 @@
 	<h1>
 		Welcome to Phunder
 		<br/>
-		<small>A simple web app for fundraising & photos!</small>
+		<small>A simple web app for fundraising and photos!</small>
 	</h1>
 
 	<div class="panel-group" id="accordion">
@@ -17,7 +17,7 @@
 	    </div>
 	    <div id="collapseOne" class="panel-collapse collapse">
 	      <div class="panel-body">
-	        People like to know who you are, especially if your fund raising.
+	        People like to know who you are, especially if you're fund raising!
 	      </div>
 	    </div>
 	  </div>
@@ -31,7 +31,7 @@
 	    </div>
 	    <div id="collapseTwo" class="panel-collapse collapse">
 	      <div class="panel-body">
-	        Phunder works with Stripe - a simple service for processing payments online, you'll need to add your bank account details to your stripe account before building yoru campaign.
+	        Phunder works with Stripe - a simple service for processing payments online, you'll need to add your bank account details to your stripe account before building a campaign page.
 	      </div>
 	    </div>
 	  </div>
@@ -45,7 +45,7 @@
 	    </div>
 	    <div id="collapseThree" class="panel-collapse collapse">
 	      <div class="panel-body">
-	        Now your ready to start fundraising, tell people a little about the campaign and maybe use an example image.
+	        Now your ready to start fundraising, tell people a little about the campaign, who it's in aid of and and maybe use an example image.
 	      </div>
 	    </div>
 	  </div>
@@ -75,39 +75,14 @@
 						</div>
 						<div class="col-md-8 ">
 						<p class="well">
-						<%= truncate(campaign.description, :length => 100) %>
+						<%= truncate(campaign.description, :length => 200) %>
 						</p>
 						<ul class='clearfix' >
 						    <% campaign.photos.each do |photo| %>
 						      <%= link_to image_tag(photo.image.url(:thumb),:class => "pull-left img-rounded"), photo %>
 						    <% end %>
 						 </ul>  
-						 <br/> 
-							<div class="panel panel-default">
-						      <div class="panel-heading">
-						         <h2>
-						            Donate & Upload
-						            <span class="label label-success pull-right">
-						              <strong>Price:</strong>
-						              $<%= campaign.price %>
-						            </span>
-						          </h2>
-						      </div>
-						      <div class="panel-body">
-						      <%= form_tag ({:controller => "photos", :action => "create"}), :enctype =>"multipart/form-data" do %>
-						        <%= label :image, "Image : " %>
-						        <%= file_field_tag "image" %>
-						        <%= hidden_field_tag :campaign_id, campaign.id %>
-						        <%= hidden_field_tag :amount, campaign.price %>
-						        <br/>
-						        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-						                data-key="<%= campaign.user.stripe_publishable_key %>"
-						                data-description="Donation to <%= campaign.name %>"
-						                data-image="<%= campaign.image.url(:thumb) %>">
-						        </script>
-						      <% end %>
-						      </div>
-						    </div>
+						 
 						</div>
 					</div>
 					<br/>
