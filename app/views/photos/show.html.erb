@@ -1,7 +1,16 @@
 
 
-<h1><%= @photo.title %></h1>
-
+<h1>
+	<%= @photo.title %>
+	<small>
+		<% if @photo.user %>by <%= @photo.user.name %><% end %>
+		<span class="pull-right label label-success">
+			<%= @photo.paid %>
+		</span>
+	</small>
+</h1>
+<br/>
+<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{photo_path(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => 'New Photo: #{@photo.title} for campaign - ' }  %>
 <hr/>
 
 

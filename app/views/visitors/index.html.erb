@@ -79,7 +79,7 @@
 						</p>
 						<ul class='clearfix' >
 						    <% campaign.photos.each do |photo| %>
-						      <%= link_to image_tag(photo.image.url(:thumb),:class => "pull-left img-rounded"), photo %>
+						      <%= link_to image_tag(photo.image.url(:thumb), :class => "pull-left img-rounded", :style => "margin-right:10px; border: 2px, solid grey;"), photo %>
 						    <% end %>
 						 </ul>  
 						 

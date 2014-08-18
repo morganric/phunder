@@ -1,18 +1,30 @@
 <div class="well form-inline" %>
-  <%= simple_form_for(@campaign) do |f| %>
+  <%= simple_form_for(@campaign,  :class => "form" ) do |f| %>
     <%= f.error_notification %>
 
-    <div class="form-inputs">
-      <%= f.input :name %>
-      <%= f.input :description %>
+    <div class="form-inputs form-group">
+      <%= f.input :name, :cols => "100" %>
+      <p class="help-block">Choose a catchy title for your campaign.</p>
+      <br/>
+      <%= f.label :description, "About" %>
+      <br/>
+      <%= f.text_area :description, :cols => "150", :rows => "20" %>
+      <p class="help-block">Tell your donars about this campaign.</p>
       <%= f.input :user_id, as: :hidden %>
       <%= f.input :target %>
+      <p class="help-block">Set a total campaign target.</p>
+      <br/>
       <%= f.input :live, as: :hidden %>
       <%= f.input :price %>
+      <p class="help-block">Set a suggested ammount to give.</p>
+      <hr/>
       <%= f.label :image, "Image" %>
       <%= f.file_field :image %>
+      <p class="help-block">The main image for the campaign, this could be an example for people to upload.</p>
+      <br/>
       <%= f.label :banner, "Banner" %>
       <%= f.file_field :banner %>
+      <p class="help-block">The backgroudn image for your campaign page.</p>
     </div>
     <hr/>
     <div class="form-actions">

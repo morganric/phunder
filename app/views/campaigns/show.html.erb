@@ -16,9 +16,21 @@
   </h1>
 <hr/>
   <div class="clearfix row" >
-  <div class="pull-left col-md-4">
-  <%= image_tag(@campaign.image.url(:square), :class => "img-rounded pull-left") %>
-  <br><br>
+  <div class="pull-left col-md-4 clearfix">
+  <p>
+    <%= image_tag(@campaign.image.url(:square), :class => "img-rounded") %>
+  </p>
+  <br/>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+           <h3>
+              Share
+            </h3>
+        </div>
+        <div class="panel-body">
+        <%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{campaign_path(@campaign)}'}, :twitter => {:via => 'phunderapp', :text  => 'Support the "#{@campaign.name}" campaign - ' } %>
+        </div>
+    </div>
   </div>
 
   <div class="pull-left col-md-8">
@@ -36,22 +48,25 @@
          <h3>
             Donate & Upload
             <span class="label label-success pull-right">
-              <strong>Price:</strong>
+              <strong>Suggested Amount:</strong>
               $<%= @campaign.price %>
             </span>
           </h3>
       </div>
       <div class="panel-body">
       <%= form_tag ({:controller => "photos", :action => "create"}), :enctype =>"multipart/form-data" do %>
+        <%= label :image, "Ammount : $" %>
+        <%= text_field_tag :amount, @campaign.price %>
+        <br/><br/>
         <%= label :image, "Image : " %>
         <%= file_field_tag "image" %>
+        <p class="help-block">Select a photo relevant to this campaign.</p>
         <%= hidden_field_tag :campaign_id, @campaign.id %>
-        <%= hidden_field_tag :amount, @campaign.price %>
         <br/>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= @campaign.user.stripe_publishable_key %>"
                 data-description="Donation to <%= @campaign.name %>"
-                data-amount="<%= @campaign.price * 100 %>"
+                data-amount=""
                 data-image="<%= @campaign.image.url(:thumb) %>">
         </script>
       <% end %>

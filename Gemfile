@@ -20,6 +20,8 @@ gem 'cloudinary'
 gem 'omniauth'
 gem 'omniauth-stripe-connect'
 gem 'omniauth-facebook'
+gem 'shareable'
+gem "font-awesome-rails"
 
 group :development do
   gem 'better_errors'

@@ -10,9 +10,12 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
+
+@import "font-awesome";
 
 ul {
 	margin-left: 0px;
@@ -35,6 +38,7 @@ main div.container {
   background-color: #eee;
   padding-bottom: 30px;
   margin-top: 30px;
+  border-radius: 5px;
 }
 
 body {
@@ -44,6 +48,10 @@ body {
 
 .nav-pills li a {
   color: grey;
+}
+
+.jumbotron {
+  padding-bottom: 0px;
 }
 
 /*!
