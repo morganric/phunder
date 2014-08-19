@@ -15,6 +15,9 @@ class PhotosController < ApplicationController
 		  @amount = params[:amount].to_i
 
 		  @photo = Photo.new()
+		  if current_user
+			  @photo.user_id = current_user.id
+		  end
 		  @photo.title = params[:title]
 		  @photo.image = params[:image]
 		  @photo.campaign_id = params[:campaign_id].to_i

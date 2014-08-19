@@ -58,7 +58,6 @@
 		  <!-- <li><a href="#photos" role="tab" data-toggle="tab">Photos</a></li> -->
 	</ul>
 </div>
-<hr/>
 <!-- Tab panes -->
 <div class="tab-content">
   <div class="tab-pane active" id="campaigns">
@@ -68,8 +67,8 @@
 						<h2 class="col-md-12">
 							<%= link_to campaign.name.split.map(&:capitalize).join(' '), campaign %>
 							<small>by <%= campaign.user.name %></small>
+							<hr/>
 						</h2>
-						<hr/>
 						<div class="col-md-4">
 						<%= link_to image_tag(campaign.image.url(:square), :class => "pull-left img-rounded"), campaign %>
 						</div>

@@ -23,6 +23,7 @@ gem 'omniauth-facebook'
 gem 'shareable'
 gem "font-awesome-rails"
 gem "rails_autolink"
+gem 'high_voltage', '~> 2.2.1'
 
 group :development do
   gem 'better_errors'
