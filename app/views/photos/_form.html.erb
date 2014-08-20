@@ -1,0 +1,15 @@
+<div class="well form-inline" %>
+  <%= simple_form_for(@photo,  :class => "form" ) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs form-group">
+      <%= f.input :hidden %>
+      
+    </div>
+    <hr/>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+
+</div>

@@ -72,10 +72,10 @@
       <% end %>
       </div>
   </div>
-    <% if @campaign.photos !=  [] %>
+    <% if @campaign.photos.where(:hidden => false) !=  [] %>
       <h3>Photos</h3>
       <hr/>
-      <% @campaign.photos.reverse.each do |photo| %>
+      <% @campaign.photos.where(:hidden => false).reverse.each do |photo| %>
         <div class="col-md-3 pull-left text-center">
           <%= link_to image_tag(photo.image.url(:square), :class => "img-rounded pull-left thumbnail"), photo %>
           <br/>

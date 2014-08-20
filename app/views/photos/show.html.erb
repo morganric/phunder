@@ -27,6 +27,11 @@
 			<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{photo_path(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => 'New Photo: #{@photo.title} for campaign - ' }  %>
 			</div>
 		</div>
+		<% if current_user && current_user.admin? %>
+		<div class="" >
+			<%= link_to "Edit", edit_photo_path(@photo) %>
+		</div>
+		<% end %>
 	</div>
 	<div class="col-md-9">
 		<%= image_tag(@photo.image.url(), :class => "pull-left") %>
