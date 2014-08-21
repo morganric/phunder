@@ -3,7 +3,7 @@
 	<h1>
 		<%= @photo.title %>
 		<small>
-			<% if @photo.user.name != "" || @photo.user == nil %>by <%= @photo.user.name %><% end %>
+			<% if @photo.user != nil %>by <%= @photo.user.name %><% end %>
 			<span class="pull-right label label-success">
 				<strong>Donated</strong>
 				$ <%= @photo.paid %>
