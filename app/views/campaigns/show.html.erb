@@ -17,8 +17,18 @@
   <hr/>
   <div class="clearfix row" >
   <div class="pull-left col-md-4 clearfix">
+
   <p>
-    <%= image_tag(@campaign.image.url(:square), :class => "img-rounded") %>
+
+       <%= cl_image_tag(@campaign.image.url().split("/").last,  :transformation=>[
+        {:width=>400, :crop=>:scale},
+        {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:south_west, :flags=>:relative, :x=>5, :y=>30,},
+        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west},
+        # {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:south_east, :flags=>:relative, :x=>5, :y=>30,},
+        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:%23#{@campaign.name}", :x=>10, :y=>5, :gravity=>:south_east}
+        ]) %>
+
+
   </p>
   <br/>
   <div class="panel panel-default">
@@ -31,7 +41,7 @@
         <%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{campaign_path(@campaign)}'}, :twitter => {:via => 'phunderapp', :text  => 'Support the "#{@campaign.name}" campaign - ' } %>
         </div>
     </div>
-    <% if current_user && current_user.admin? || current_user = @campaign.user %>
+    <% if current_user && current_user.admin? || current_user == @campaign.user %>
       <%= link_to "Edit", edit_campaign_path(@campaign), :class => "btn btn-default btn-xs" %>    
       <%= link_to "Delete", campaign_path(@campaign), :method => "DELETE", confirm: "Are you sure?", :class => "btn btn-danger btn-xs" %>
     <% end %>

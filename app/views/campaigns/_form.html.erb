@@ -14,7 +14,8 @@
       <%= f.input :target %>
       <p class="help-block">Set a total campaign target.</p>
       <br/>
-      <%= f.input :live, as: :hidden %>
+      <%= f.input :hashtag %>
+      <p class="help-block">Set a #hashtag for the campaign.</p>
       <%= f.input :price %>
       <p class="help-block">Set a suggested ammount to give.</p>
       <hr/>
@@ -25,6 +26,12 @@
       <%= f.label :banner, "Banner" %>
       <%= f.file_field :banner %>
       <p class="help-block">The backgroudn image for your campaign page.</p>
+
+      <% if current_user && current_user.admin? %>
+        <hr/>
+        <%= f.input :end_date %>
+        <%= f.input :live %>
+      <% end %>
     </div>
     <hr/>
     <div class="form-actions">
