@@ -3,7 +3,7 @@
 	<h1>
 		<%= @photo.title %>
 		<small>
-			<% if @photo.user %>by <%= @photo.user.name %><% end %>
+			<% if @photo.user.name %>by <%= @photo.user.name %><% end %>
 			<span class="pull-right label label-success">
 				<strong>Donated</strong>
 				$ <%= @photo.paid %>
@@ -24,7 +24,7 @@
 	            </h3>
 	        </div>
 	        <div class="panel-body">
-			<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{photo_path(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => 'New Photo: #{@photo.title} for campaign - ' }  %>
+			<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{photo_url(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => 'New Photo: #{@photo.title} for campaign - ', :hashtags => @photo.campaign.hashtag }  %>
 			</div>
 		</div>
 		<% if current_user && current_user.admin? %>
@@ -34,7 +34,17 @@
 		<% end %>
 	</div>
 	<div class="col-md-9">
-		<%= image_tag(@photo.image.url(), :class => "pull-left") %>
+		<%#= image_tag(@photo.image.url(), :class => "pull-left") %>
+
+		<%= cl_image_tag(@photo.image.url().split("/").last,  :transformation=>[
+        {:width=>400, :crop=>:scale},
+        {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:north_west, :flags=>:relative, :x=>5, :y=>5},
+        {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west},
+        # {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:south_east, :flags=>:relative, :x=>5, :y=>30,},
+        {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:%23#{@photo.campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east}
+        ], :class=>"pull-left") %>
+
+        <br/>
 		<div class="pull-left">
 			<h3>Comments<h3/>
 			<hr/>

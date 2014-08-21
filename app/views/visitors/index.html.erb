@@ -59,7 +59,7 @@
 	</ul>
 </div>
 <!-- Tab panes -->
-<div class="tab-content">
+<div class="tab-content col-md-12">
   <div class="tab-pane active" id="campaigns">
 			<div class="">
 				<% @campaigns.reverse.each do |campaign| %>
@@ -70,9 +70,17 @@
 							<hr/>
 						</h2>
 						<div class="col-md-4">
-						<%= link_to image_tag(campaign.image.url(:square), :class => "pull-left img-rounded"), campaign %>
+
+						<%= link_to cl_image_tag(campaign.image.url().split("/").last,  :transformation=>[
+					        {:width=>400, :crop=>:scale},
+					        {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:north_west, :flags=>:relative, :x=>5, :y=>5,},
+					        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west},
+					        # {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:south_east, :flags=>:relative, :x=>5, :y=>30,},
+					        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:%23#{campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east}
+					        ], :class=>"pull-left img-rounded"), campaign %>
+
 						</div>
-						<div class="col-md-8 ">
+						<div class="col-md-8">
 						<p class="well">
 						<%= truncate(campaign.description, :length => 200) %>
 						</p>
