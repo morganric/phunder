@@ -40,7 +40,7 @@ class PhotosController < ApplicationController
 		  charge = Stripe::Charge.create(
 		    :customer    => customer.id,
 		    :amount      => @amount * 100,
-		    :description => 'Rails Stripe customer',
+		    :description => 'Phunder App',
 		    :currency    => 'usd'
 		  )
 
