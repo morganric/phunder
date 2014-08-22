@@ -43,7 +43,7 @@
         {:width=>400, :crop=>:scale},
         {:opacity=>80, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:north_west, :flags=>:relative, :x=>5, :y=>5},
         {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west},
-        # {:opacity=>90, :overlay=> @photo.campaign.water_mark.url(:water_mark).split("/").last, :crop=>:scale, :gravity=>:north_east, :flags=>:relative, :x=>5, :y=>5, :size => "50"},
+        {:opacity=>90, :overlay=> @photo.campaign.water_mark.url(:water_mark).split("/").last, :crop=>:scale, :gravity=>:north_east, :flags=>:relative, :x=>5, :y=>5, :size => "50"},
         {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:%23#{@photo.campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east}
         ], :class=>"pull-left thumbnail") %>
 
