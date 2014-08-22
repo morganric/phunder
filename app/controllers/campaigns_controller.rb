@@ -31,6 +31,7 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns/1/edit
   def edit
+    authorize @campaign
   end
 
   # POST /campaigns

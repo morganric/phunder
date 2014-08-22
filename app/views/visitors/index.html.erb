@@ -5,56 +5,64 @@
 		<br/>
 		<small>A simple web app for fundraising with photos!</small>
 	</h1>
-
-	<div class="panel-group" id="accordion">
-	  <div class="panel panel-default">
-	    <div class="panel-heading">
-	      <h3 class="panel-title">
-	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-	          1. Signup with your Facebook account
-	        </a>
-	      </h3>
-	    </div>
-	    <div id="collapseOne" class="panel-collapse collapse">
-	      <div class="panel-body">
-	        People like to know who you are, especially if you're fund raising!
-	      </div>
-	    </div>
-	  </div>
-	  <div class="panel panel-default">
-	    <div class="panel-heading">
-	      <h4 class="panel-title">
-	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-	          2. Connect your account with <a href="http://www.stripe.com" style="text-decoration:underline;" target="_blank">Stripe</a>
-	        </a>
-	      </h4>
-	    </div>
-	    <div id="collapseTwo" class="panel-collapse collapse">
-	      <div class="panel-body">
-	        Phunder works with Stripe - a simple service for processing payments online, you'll need to add your bank account details to your stripe account before building a campaign page.
-	      </div>
-	    </div>
-	  </div>
-	  <div class="panel panel-default">
-	    <div class="panel-heading">
-	      <h4 class="panel-title">
-	        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-	          3. Build your fun photo fundraising campaign!
-	        </a>
-	      </h4>
-	    </div>
-	    <div id="collapseThree" class="panel-collapse collapse">
-	      <div class="panel-body">
-	        Now your ready to start fundraising, tell people a little about the campaign, who it's in aid of and and maybe use an example image.
-	      </div>
-	    </div>
-	  </div>
+	<div class="row clearfix" >
+	<div class="col-md-6" >
+	<h2>For Fundraisers</h2>
+		<div class="panel-group" id="accordion">
+		  <div class="panel panel-default">
+		    <div class="panel-heading">
+		      <h3 class="panel-title">
+		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+		          1. Signup with your Facebook account
+		        </a>
+		      </h3>
+		    </div>
+		    <div id="collapseOne" class="panel-collapse collapse">
+		      <div class="panel-body">
+		        People like to know who you are, especially if you're fund raising!
+		      </div>
+		    </div>
+		  </div>
+		  <div class="panel panel-default">
+		    <div class="panel-heading">
+		      <h4 class="panel-title">
+		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+		          2. Connect your account with <a href="http://www.stripe.com" style="text-decoration:underline;" target="_blank">Stripe</a>
+		        </a>
+		      </h4>
+		    </div>
+		    <div id="collapseTwo" class="panel-collapse collapse">
+		      <div class="panel-body">
+		        Phunder works with Stripe - a simple service for processing payments online, you'll need to add your bank account details to your stripe account before building a campaign page.
+		      </div>
+		    </div>
+		  </div>
+		  <div class="panel panel-default">
+		    <div class="panel-heading">
+		      <h4 class="panel-title">
+		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+		          3. Build your photo fundraising campaign!
+		        </a>
+		      </h4>
+		    </div>
+		    <div id="collapseThree" class="panel-collapse collapse">
+		      <div class="panel-body">
+		        Now your ready to start fundraising, tell people a little about the campaign, who it's in aid of and and maybe use an example image.
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</div>
+	<div class="col-md-6">
+		<h2>For Donars</h2>
+		
+	</div>
+	</div>	
 </div>
 
 <div class="col-md-12">
 	<ul class="nav nav-pills" role="tablist">
-		  <li class="active"><a href="#campaigns" role="tab" data-toggle="tab">All Campaigns</a></li>
+		  <!-- <li class="active"><a href="#campaigns" role="tab" data-toggle="tab">All Campaigns</a></li> -->
 		  <!-- <li><a href="#photos" role="tab" data-toggle="tab">Photos</a></li> -->
 	</ul>
 </div>
@@ -66,18 +74,25 @@
 					<div class="clearfix">
 						<h2 class="col-md-12">
 							<%= link_to campaign.name.split.map(&:capitalize).join(' '), campaign %>
-							<small>by <%= campaign.user.name %></small>
+							<small>by <%= campaign.user.name %>
+							
+							<label class="label label-info pull-right" ><%= campaign.percent %>%</label>
+							<label class="label label-success pull-right" >$<%= campaign.target %></label>
+							<br/>
+							<span class="pull-right">#<%= campaign.hashtag %></span>
+							
+							</small>
 							<hr/>
 						</h2>
 						<div class="col-md-4">
 
-						<%= link_to cl_image_tag(campaign.image.url().split("/").last,  :transformation=>[
+						<%= link_to cl_image_tag(campaign.image.url(:square).split("/").last,  :transformation=>[
 					        {:width=>400, :crop=>:scale},
 					        {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:north_west, :flags=>:relative, :x=>5, :y=>5,},
 					        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west},
 					        # {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:south_east, :flags=>:relative, :x=>5, :y=>30,},
 					        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:%23#{campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east}
-					        ], :class=>"pull-left img-rounded"), campaign %>
+					        ], :class=>"pull-left thumbnail img-rounded", :width => "360px" ), campaign %>
 
 						</div>
 						<div class="col-md-8">
@@ -85,10 +100,11 @@
 						<%= truncate(campaign.description, :length => 200) %>
 						</p>
 						<ul class='clearfix' >
-						    <% campaign.photos.where(:hidden => false).each do |photo| %>
-						      <%= link_to image_tag(photo.image.url(:thumb), :class => "pull-left img-rounded", :style => "margin-right:10px; border: 2px, solid grey;"), photo %>
+						    <% campaign.photos.where(:hidden => false).limit(6).each do |photo| %>
+						      <%= link_to image_tag(photo.image.url(:thumb), :class => "pull-left thumbnail img-rounded", :style => "margin-right:10px; border: 2px, solid grey;"), photo %>
 						    <% end %>
 						 </ul>  
+						 <%= button_to "Donate", campaign, :class => "btn btn-success btn-lg btn-block", :method => :get %>
 						 
 						</div>
 					</div>
@@ -98,3 +114,15 @@
 		</div>
 		<div class="tab-pane" id="photos">
 </div>
+
+
+<style type="text/css">
+	main .container {
+		padding:0px;
+	}
+	.jumbotron {
+		border-top-left-radius: 10px !important;
+		border-top-right-radius: 10px !important;
+	}
+
+</style>

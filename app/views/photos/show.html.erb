@@ -3,20 +3,23 @@
 	<h1>
 		<%= @photo.title %>
 		<small>
-			<% if @photo.user != nil %>by <%= @photo.user.name %><% end %>
+			<% if @photo.user.name != nil %>by <%= @photo.user.name %>
+
+			<hr/>
+			<% end %>
 			<span class="pull-right label label-success">
 				<strong>Donated</strong>
 				$ <%= @photo.paid %>
 			</span>
 		</small>
 	</h1>
-	<h2>
-	<small>
-	Campaign: <%= link_to @photo.campaign.name, @photo.campaign  %>
-	</small>
-	</h2>
-	<hr/>
-	<div class="col-md-3">
+	<div class="col-md-3 row">
+		<h2>
+		<small>
+		Campaign: <%= link_to @photo.campaign.name, @photo.campaign  %>
+		</small>
+		</h2>
+		<hr/>
 		<div class="panel panel-default">
 	    <div class="panel-heading">
 	           <h3>
@@ -24,12 +27,12 @@
 	            </h3>
 	        </div>
 	        <div class="panel-body">
-			<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{photo_url(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => 'New Photo: #{@photo.title} for campaign - ', :hashtags => @photo.campaign.hashtag }  %>
+			<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{photo_url(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => "New Photo: #{@photo.title} for the #{@photo.campaign.name}3 campaign - ", :hashtags => @photo.campaign.hashtag }  %>
 			</div>
 		</div>
 		<% if current_user && current_user.admin? %>
 		<div class="" >
-			<%= link_to "Edit", edit_photo_path(@photo) %>
+			<%= link_to "Edit", edit_photo_path(@photo), :class => "btn btn-default btn-xs" %>
 		</div>
 		<% end %>
 	</div>
@@ -42,7 +45,7 @@
         {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west},
         # {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:south_east, :flags=>:relative, :x=>5, :y=>30,},
         {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:%23#{@photo.campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east}
-        ], :class=>"pull-left") %>
+        ], :class=>"pull-left thumbnail") %>
 
         <br/>
 		<div class="pull-left">

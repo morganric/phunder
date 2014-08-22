@@ -7,6 +7,15 @@ class Campaign < ActiveRecord::Base
 	belongs_to :user
 	has_many :photos
 
+  def percent
+      running = 0
+      self.photos.each do |photo| 
+        running = running + photo.paid
+      end
+
+    return  (running.to_f / self.target.to_f) * 100
+  end
+
 	private
     # Use callbacks to share common setup or constraints between actions.
     def set_campaign

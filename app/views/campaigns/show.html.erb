@@ -9,15 +9,20 @@
           $<%= @campaign.target %>
         </strong>
       </p>
+      <p class="label label-success">
+        <strong><%= @campaign.percent %>%</strong>
+      </p>
       </span>
   <br/>
    <small>
+  <% if @campaign.user.name != nil %>
     by <%= @campaign.user.name %>
+    <% end %>
     </small>
   </h1>
   <hr/>
   <div class="clearfix row" >
-  <div class="pull-left col-md-4 clearfix">
+  <div class="pull-right col-md-4">
 
   <p>
 
@@ -27,7 +32,7 @@
         {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west},
         # {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:south_east, :flags=>:relative, :x=>5, :y=>30,},
         {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:%23#{@campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east}
-        ]) %>
+        ], :class=>"img-rounded thumbnail", :width => "360px") %>
 
 
   </p>
@@ -50,27 +55,31 @@
 
   <div class="pull-left col-md-8">
     <p class="well clearfix">
-    <%= auto_link(truncate(@campaign.description, length: 500)) %>
+    <%= auto_link(truncate(@campaign.description.gsub(/\n/, '<br/>').html_safe, length: 500)) %>
     <br/>
     </p>
 
-    <div class="panel panel-default">
+    <div class="panel panel-info">
       <div class="panel-heading">
          <h3>
             Donate & Upload
-            <span class="label label-success pull-right">
-              <strong>Suggested Amount:</strong>
+            <span class="label label-info pull-right">
+              Suggested Amount:
               $<%= @campaign.price %>
             </span>
           </h3>
       </div>
       <div class="panel-body">
       <%= form_tag ({:controller => "photos", :action => "create"}), :enctype =>"multipart/form-data" do %>
-        <%= label :image, "Ammount : $" %>
-        <%= text_field_tag :amount, @campaign.price %>
+        
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+            <%= text_field_tag :amount, @campaign.price, :class=> "form-control", :width => "50%" %>
+        </div>
+
         <br/><br/>
-        <%= label :image, "Image : " %>
-        <%= file_field_tag "image" %>
+        <%#= label :image, "Image : " %>
+        <%= file_field_tag "image" , :class => "btn btn-default" %>
         <p class="help-block">Select a photo relevant to this campaign.</p>
         <%= hidden_field_tag :campaign_id, @campaign.id %>
         <br/>
@@ -87,8 +96,8 @@
       <h3>Photos</h3>
       <hr/>
       <% @campaign.photos.where(:hidden => false).reverse.each do |photo| %>
-        <div class="col-md-3 pull-left text-center">
-          <%= link_to image_tag(photo.image.url(:square), :class => "img-rounded pull-left thumbnail"), photo %>
+        <div class="col-md-4 pull-left text-center">
+          <%= link_to image_tag(photo.image.url(), :class => "img-rounded pull-left thumbnail", :width => "200px"), photo %>
           <br/>
           <p class="pull-left">
             <h3><%= link_to photo.title|| "View", photo %></h3>

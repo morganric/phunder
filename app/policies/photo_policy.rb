@@ -1,4 +1,4 @@
-class CampaignPolicy
+class PhotoPolicy
   attr_reader :user, :record
 
   def initialize(user, record)

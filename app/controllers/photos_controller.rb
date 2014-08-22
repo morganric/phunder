@@ -1,4 +1,7 @@
 class PhotosController < ApplicationController
+	before_filter :authenticate_user!, except: [:show, :index]	
+
+
 	def index
 		@photos = Photo.all
 	end
@@ -12,6 +15,7 @@ class PhotosController < ApplicationController
 
 	def edit
 		@photo = Photo.find(params[:id])
+		authorize @photo
 	end
 
 	def create
