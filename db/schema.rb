@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140821114813) do
+ActiveRecord::Schema.define(version: 20140822171237) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20140821114813) do
     t.datetime "updated_at"
     t.date     "end_date"
     t.string   "hashtag"
+    t.string   "water_mark"
   end
 
   create_table "photos", force: true do |t|

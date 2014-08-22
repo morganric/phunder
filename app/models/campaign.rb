@@ -4,6 +4,8 @@ class Campaign < ActiveRecord::Base
 
 	mount_uploader :banner, ImageUploader
 
+  mount_uploader :water_mark, ImageUploader
+
 	belongs_to :user
 	has_many :photos
 

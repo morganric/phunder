@@ -25,7 +25,10 @@
       <br/>
       <%= f.label :banner, "Banner" %>
       <%= f.file_field :banner %>
-      <p class="help-block">The backgroudn image for your campaign page.</p>
+      <p class="help-block">The background image for your campaign page.</p>
+      <br/>
+      <%= f.file_field :water_mark %>
+      <p class="help-block">Upload a transparent png 50px X 50px</p>
 
       <% if current_user && current_user.admin? %>
         <hr/>
