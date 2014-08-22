@@ -55,7 +55,7 @@
 
   <div class="pull-left col-md-8">
     <p class="well clearfix">
-    <%= auto_link(truncate(@campaign.description.gsub(/\n/, '<br/>').html_safe, length: 500)) %>
+    <%= auto_link(@campaign.description.gsub(/\n/, '<br/>').html_safe, :all, :target => "_blank") %>
     <br/>
     </p>
 
