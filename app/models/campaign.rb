@@ -13,7 +13,7 @@ class Campaign < ActiveRecord::Base
         running = running + photo.paid
       end
 
-    return  (running.to_f / self.target.to_f) * 100
+    return  (running.to_f / self.target.to_f).round * 100.0
   end
 
 	private
