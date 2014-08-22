@@ -4,12 +4,12 @@
     <%= @campaign.name.split.map(&:capitalize).join(' ') %>
     (#<%= @campaign.hashtag %>) 
       <span class="pull-right">
-      <p class="label label-info">
+      <p class="label label-success">
         <strong>Target:
           $<%= @campaign.target %>
         </strong>
       </p>
-      <p class="label label-success">
+      <p class="label label-info">
         <strong><%= @campaign.percent %>%</strong>
       </p>
       </span>

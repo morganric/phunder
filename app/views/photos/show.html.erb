@@ -3,7 +3,7 @@
 	<h1>
 		<%= @photo.title %>
 		<small>
-			<% if @photo.user.name != nil %>by <%= @photo.user.name %>
+			<% if @photo.user != nil %>by <%= @photo.user.name %>
 
 			<hr/>
 			<% end %>
