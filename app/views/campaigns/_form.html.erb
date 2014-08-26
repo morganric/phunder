@@ -22,14 +22,17 @@
       <%= f.label :image, "Image" %>
       <%= f.file_field :image %>
       <p class="help-block">The main image for the campaign, this could be an example for people to upload.</p>
+      <p class="help-block pul-left"><%= image_tag(@campaign.image.url(:thumb)) %></p>
       <br/>
       <%= f.label :banner, "Banner" %>
       <%= f.file_field :banner %>
       <p class="help-block">The background image for your campaign page.</p>
+      <p class="help-block pul-left"><%= image_tag(@campaign.banner.url(:thumb)) %></p>
       <br/>
       <%= f.label :water_mark, "Water Mark" %>
       <%= f.file_field :water_mark %>
       <p class="help-block">Upload a transparent png 50px X 50px</p>
+      <p class="help-block pul-left"><%= image_tag(@campaign.water_mark.url(:thumb)) %></p>
 
       <% if current_user && current_user.admin? %>
         <hr/>
