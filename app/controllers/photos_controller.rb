@@ -5,6 +5,8 @@ class PhotosController < ApplicationController
 
 	def show
 		@photo = Photo.find(params[:id])
+		@photo.views += 1
+		@photo.save
 	end
 
 	def new
@@ -38,6 +40,16 @@ class PhotosController < ApplicationController
 		  redirect_to charges_path
 
 		 redirect_to photo_path(@photo)
-end
+	end
 
+	private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_photo
+      @photo = Photo.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def photo_params
+      params.require(:photo).permit(:title, :image, :user_id, :campaign_id, :url, :visits, :clicks)
+    end
 end

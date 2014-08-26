@@ -5,8 +5,9 @@
 	<small>
 		<% if @photo.user %>by <%= @photo.user.name %><% end %>
 		<span class="pull-right label label-success">
-			<%= @photo.paid %>
+			$<%= @photo.paid %>
 		</span>
+		<label clas="label pull-right label-default"><%= @photo.views %></label>
 	</small>
 </h1>
 <br/>

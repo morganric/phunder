@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813194739) do
+ActiveRecord::Schema.define(version: 20140826123857) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 20140813194739) do
     t.string   "banner"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "end_date"
+    t.string   "hashtag"
+    t.string   "water_mark"
   end
 
   create_table "photos", force: true do |t|
@@ -34,6 +37,10 @@ ActiveRecord::Schema.define(version: 20140813194739) do
     t.integer  "paid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hidden",      default: false
+    t.integer  "clicks",      default: 0
+    t.integer  "views",       default: 0
+    t.string   "url"
   end
 
   create_table "users", force: true do |t|
