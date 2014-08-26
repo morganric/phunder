@@ -1,30 +1,86 @@
 
+<div class="clearfix col-md-12">
+		
+	<h1>
+		<% if @photo.title != nil %>
+		<%= link_to @photo.title, @photo.url, :target => "_blank" %>
+		<% end %>
 
-<h1>
-	<%= @photo.title %>
-	<small>
-		<% if @photo.user %>by <%= @photo.user.name %><% end %>
-		<span class="pull-right label label-success">
-			$<%= @photo.paid %>
-		</span>
-		<label clas="label pull-right label-default"><%= @photo.views %></label>
-	</small>
-</h1>
-<br/>
-<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{photo_path(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => 'New Photo: #{@photo.title} for campaign - ' }  %>
-<hr/>
+		<small>
+			
+		<% if @photo.user.name != nil %>
+		by <%= @photo.user.name %>
+		<% end %>
+		</small>
+	</h1>
 
+	<h2>
+		Campaign: <%= link_to @photo.campaign.name, @photo.campaign  %>
+	</h2>
+	<hr/>
+	<div class="col-md-4 row">
+		<div class="panel panel-default">
+		    <div class="panel-heading">
+			    <h3>Stats</h3>
+		    </div>
+		    <div class="panel-body">
+		    	<h4>
+			    	<label class=" label  label-success">
+					    <i>$</i> <%= @photo.paid %> Donated
+					</label><br/><br/>
+				    <label class="label label-lg label-info">
+			    		<i class="glyphicon glyphicon-eye-open"></i> <%= @photo.views %> Views
+					</label>
+				</h4>
+		    </div>
+	    </div>
+		
+		<div class="panel panel-default">
+	    <div class="panel-heading">
+	           <h3>
+	              Share
+	            </h3>
+	        </div>
+	        <div class="panel-body">
+			<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'pinterest'], :facebook=> {:send=> 'true', :url=> '#{photo_url(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => "New Photo: #{@photo.title} for the #{@photo.campaign.name}3 campaign - ", :hashtags => @photo.campaign.hashtag }  %>
+			</div>
+		</div>
+		<% if current_user && current_user.admin? %>
+		<div class="" >
+			<%= link_to "Edit", edit_photo_path(@photo), :class => "btn btn-default btn-xs" %>
+		</div>
+		<% end %>
+	</div>
+	<div class="col-md-8">
+		<%#= image_tag(@photo.image.url(), :class => "pull-left") %>
+		<div class="clearfix">
+		<%= link_to cl_image_tag(@photo.image.url().split("/").last,  :transformation=>[
+        {:width=>400, :crop=>:scale},
+        {:opacity=>80, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:north_west, :flags=>:relative, :x=>5, :y=>5},
+        {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west},
+        {:opacity=>90, :overlay=> @photo.campaign.water_mark.url(:water_mark).split("/").last, :crop=>:scale, :gravity=>:north_east, :flags=>:relative, :x=>5, :y=>5, :size => "50"},
+        {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:%23#{@photo.campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east}
+        ], :class=>"pull-left thumbnail"), @photo.url, :target => "_blank" %>
 
-<%= image_tag(@photo.image.url()) %>
+        </div>
+		<div class="pull-left row">
+			<h3>Comments<h3/>
+			<hr/>
+			<div class="fb-comments" data-href="<%= photo_url(@photo)%>" data-numposts="5" data-colorscheme="light"></div>
+		</h3>
+		</div>
+	</div>
 
-<h2>
-<% if @photo.user != nil %>
-by <%= @photo.user.name %>
-<% end %>
-<small>
-for <%= link_to @photo.campaign.name, @photo.campaign  %>
-</small>
-</h2>
+</div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=615925001838726&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <style type="text/css">
   body {

@@ -3,28 +3,48 @@
     <%= f.error_notification %>
 
     <div class="form-inputs form-group">
-      <%= f.input :name, :cols => "100" %>
+      <%= f.label :name %><br/>
+      <%= f.text_area :name, :cols => "60", :rows => 1 %>
       <p class="help-block">Choose a catchy title for your campaign.</p>
       <br/>
       <%= f.label :description, "About" %>
       <br/>
-      <%= f.text_area :description, :cols => "150", :rows => "20" %>
+      <%= f.text_area :description, :cols => "60", :rows => "10" %>
       <p class="help-block">Tell your donars about this campaign.</p>
       <%= f.input :user_id, as: :hidden %>
-      <%= f.input :target %>
+      <br/>
+      <%= f.label :target %>
+      <%= f.number_field :target, :min => 1 %>
       <p class="help-block">Set a total campaign target.</p>
       <br/>
-      <%= f.input :live, as: :hidden %>
-      <%= f.input :price %>
+      <%= f.input :hashtag, :placeholder => "hashtag" %>
+      <p class="help-block">Set a #hashtag for the campaign.</p>
+      <br/>
+      <%= f.label :price %>
+      <%= f.number_field :price, :min => 1, :placeholder => 5 %>
       <p class="help-block">Set a suggested ammount to give.</p>
-      <hr/>
+      <br/>
       <%= f.label :image, "Image" %>
       <%= f.file_field :image %>
       <p class="help-block">The main image for the campaign, this could be an example for people to upload.</p>
+      <p class="help-block pul-left"><%= image_tag(@campaign.image.url(:thumb)) %></p>
       <br/>
       <%= f.label :banner, "Banner" %>
       <%= f.file_field :banner %>
-      <p class="help-block">The backgroudn image for your campaign page.</p>
+      <p class="help-block">The background image for your campaign page.</p>
+      <p class="help-block pul-left"><%= image_tag(@campaign.banner.url(:thumb)) %></p>
+      <br/>
+      <%= f.label :water_mark, "Water Mark" %>
+      <%= f.file_field :water_mark %>
+      <p class="help-block">Upload a transparent png 50px X 50px</p>
+      <p class="help-block pul-left"><%= image_tag(@campaign.water_mark.url(:thumb)) %></p>
+
+      <% if current_user && current_user.admin? %>
+        <hr/>
+        <%= f.input :end_date %>
+        <br/>
+        <%= f.input :live %>
+      <% end %>
     </div>
     <hr/>
     <div class="form-actions">

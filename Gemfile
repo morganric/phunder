@@ -22,6 +22,14 @@ gem 'omniauth-stripe-connect'
 gem 'omniauth-facebook'
 gem 'shareable'
 gem "font-awesome-rails"
+gem "rails_autolink"
+gem 'high_voltage', '~> 2.2.1'
+gem 'therubyracer'
+gem "less-rails"
+gem 'less-rails-bootstrap'
+gem "twitter-bootstrap-rails"
+gem 'twitter-bootswatch-rails'
+gem 'twitter-bootswatch-rails-helpers'
 
 group :development do
   gem 'better_errors'

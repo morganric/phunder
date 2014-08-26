@@ -1,65 +1,56 @@
 
 <article style="">
   <h1>
-    <%= @campaign.name.capitalize %>
+    <%= @campaign.name.split.map(&:capitalize).join(' ') %>
+    (#<%= @campaign.hashtag %>) 
       <span class="pull-right">
-      <p class="label label-info">
+      <p class="label label-success">
         <strong>Target:
           $<%= @campaign.target %>
         </strong>
       </p>
+      <p class="label label-info">
+        <strong><%= @campaign.percent %>%</strong>
+      </p>
       </span>
   <br/>
    <small>
+  <% if @campaign.user.name != nil %>
     by <%= @campaign.user.name %>
+    <% end %>
     </small>
   </h1>
-<hr/>
+  <hr/>
   <div class="clearfix row" >
-  <div class="pull-left col-md-4 clearfix">
-  <p>
-    <%= image_tag(@campaign.image.url(:square), :class => "img-rounded") %>
-  </p>
-  <br/>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-           <h3>
-              Share
-            </h3>
-        </div>
-        <div class="panel-body">
-        <%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'tumblr'], :facebook=> {:send=> 'true', :url=> '#{campaign_path(@campaign)}'}, :twitter => {:via => 'phunderapp', :text  => 'Support the "#{@campaign.name}" campaign - ' } %>
-        </div>
-    </div>
-  </div>
+  
 
   <div class="pull-left col-md-8">
     <p class="well clearfix">
-    <%= truncate(@campaign.description, length: 500) %>
+    <%= auto_link(@campaign.description.gsub(/\n/, '<br/>').html_safe, :all, :target => "_blank") %>
     <br/>
-    <% if current_user && current_user.admin? %>
-      <%= link_to "Edit", edit_campaign_path(@campaign), :class => "btn btn-default btn-xs pull-right" %>    
-      <%= link_to "Delete", campaign_path(@campaign), :method => "DELETE", confirm: "Are you sure?", :class => "btn btn-danger btn-xs pull-right" %>
-    <% end %>
     </p>
 
-    <div class="panel panel-default">
+    <div class="panel panel-info">
       <div class="panel-heading">
          <h3>
             Donate & Upload
-            <span class="label label-success pull-right">
-              <strong>Suggested Amount:</strong>
-              $<%= @campaign.price %>
+            <span class="label label-info pull-right">
+              Minimum:
+              $<%= number_with_precision(@campaign.price, :precision => 2) %>
             </span>
           </h3>
       </div>
       <div class="panel-body">
       <%= form_tag ({:controller => "photos", :action => "create"}), :enctype =>"multipart/form-data" do %>
-        <%= label :image, "Ammount : $" %>
-        <%= text_field_tag :amount, @campaign.price %>
+        
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+            <%= number_field_tag :amount, number_with_precision(@campaign.price, :precision => 2), :class=> "form-control", :width => "50%", :min => number_with_precision(@campaign.price, :precision => 2), :step => 1 %>
+        </div>
+
         <br/><br/>
-        <%= label :image, "Image : " %>
-        <%= file_field_tag "image" %>
+        <%#= label :image, "Image : " %>
+        <%= file_field_tag "image" , :class => "btn btn-default" %>
         <p class="help-block">Select a photo relevant to this campaign.</p>
         <%= hidden_field_tag :campaign_id, @campaign.id %>
         <br/>
@@ -72,21 +63,52 @@
       <% end %>
       </div>
   </div>
-    <% if @campaign.photos !=  [] %>
+    <% if @campaign.photos.where(:hidden => false) !=  [] %>
       <h3>Photos</h3>
       <hr/>
-      <% @campaign.photos.reverse.each do |photo| %>
-        <div class="col-md-3 pull-left text-center">
-          <%= link_to image_tag(photo.image.url(:square), :class => "img-rounded pull-left"), photo %>
+      <% @campaign.photos.where(:hidden => false).reverse.each do |photo| %>
+        <div class="col-md-4 pull-left text-center">
+          <%= link_to image_tag(photo.image.url(), :class => "img-rounded pull-left thumbnail", :width => "200px"), photo %>
           <br/>
           <p class="pull-left">
-            <h3><%= link_to photo.title|| "View", photo %></h3>
+            <h3><%= link_to photo.title|| "View", photo, :class => "btn btn-sm btn-default" %></h3>
           </p>
         </div>
 
       <% end %>
     <% end %>
 
+  </div>
+
+  <div class="pull-left col-md-4">
+
+  <p>
+
+       <%= cl_image_tag(@campaign.image.url().split("/").last,  :transformation=>[
+        {:width=>400, :crop=>:scale},
+        {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:north_west, :flags=>:relative, :x=>5, :y=>5},
+        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west},
+         {:opacity=>90, :overlay=> @campaign.water_mark.url(:water_mark).split("/").last, :crop=>:scale, :gravity=>:north_east, :flags=>:relative, :x=>5, :y=>5, :size => "50"},
+        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:%23#{@campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east}
+        ], :class=>"img-rounded thumbnail", :width => "360px") %>
+
+
+  </p>
+  <br/>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+           <h3>
+              Share
+            </h3>
+        </div>
+        <div class="panel-body">
+        <%= render_shareable :turbolinks => true, :buttons => ['facebook', 'twitter', 'pinterest'], :facebook=> {:send=> 'true', :url=> '#{campaign_path(@campaign)}'}, :twitter => {:via => 'phunderapp', :text  => "Support the #{@campaign.name} campaign - ", :hashtags => @campaign.hashtag } %>
+        </div>
+    </div>
+    <% if current_user && current_user.admin? || current_user == @campaign.user %>
+      <%= link_to "Edit", edit_campaign_path(@campaign), :class => "btn btn-default btn-xs" %>    
+      <%= link_to "Delete", campaign_path(@campaign), :method => "DELETE", confirm: "Are you sure?", :class => "btn btn-danger btn-xs" %>
+    <% end %>
   </div>
   </div>
 </article>

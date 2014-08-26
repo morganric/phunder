@@ -1,1 +1,9 @@
 <h2>Thanks, you paid <strong>$<%= @photo.paid %></strong>!</h2>
+
+<h3>
+<%= link_to "Back to Campaign page", campaign_path(params[:campaign_id]) %>
+</h3>
+
+<h3>
+<%= link_to "View your Photo contribution", photo_path(@photo]) %>
+</h3>

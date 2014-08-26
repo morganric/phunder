@@ -1,5 +1,8 @@
 class CampaignsController < ApplicationController
+  before_filter :authenticate_user!, except: [:show, :index]
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
+  require 'rails_autolink'
+
 
   # GET /campaigns
   # GET /campaigns.json
@@ -28,6 +31,7 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns/1/edit
   def edit
+    authorize @campaign
   end
 
   # POST /campaigns
@@ -79,6 +83,7 @@ class CampaignsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def campaign_params
-      params.require(:campaign).permit(:name, :description, :user_id, :target, :live, :price, :image, :banner)
+      params.require(:campaign).permit(:name, :description, :user_id, :target,
+       :live, :price, :image, :banner, :end_date, :hashtag, :water_mark)
     end
 end
