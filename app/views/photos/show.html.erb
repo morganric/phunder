@@ -7,10 +7,9 @@
 		<% end %>
 
 		<small>
-			
-		<% if @photo.user != nil %>
-		by <%= @photo.user.name %>
-		<% end %>
+			<% if @photo.user != nil %>
+				<%= @photo.user.name %>
+			<% end %>
 		</small>
 	</h1>
 
@@ -63,7 +62,7 @@
         ], :class=>"pull-left thumbnail"), @photo.url, :target => "_blank" %>
 
         </div>
-		<div class="pull-left row">
+		<div class="pull-left">
 			<h3>Comments<h3/>
 			<hr/>
 			<div class="fb-comments" data-href="<%= photo_url(@photo)%>" data-numposts="5" data-colorscheme="light"></div>

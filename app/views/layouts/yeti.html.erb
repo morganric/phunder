@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "phunder" %></title>
-   <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Phunder" %>">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Phunder" %>">
+    <%= content_for?(:head) ? yield(:head) : "" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>

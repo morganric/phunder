@@ -9,6 +9,11 @@ class Campaign < ActiveRecord::Base
 	belongs_to :user
 	has_many :photos
 
+  paginates_per 10
+
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   def percent
       running = 0
       self.photos.each do |photo| 

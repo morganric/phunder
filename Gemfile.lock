@@ -109,6 +109,8 @@ GEM
     font-awesome-rails (4.1.0.0)
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
+    friendly_id (5.0.3)
+      activerecord (>= 4.0.0)
     guard (2.6.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -136,6 +138,9 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (1.0.0)
+    kaminari (0.15.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     less (2.5.0)
@@ -154,6 +159,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta-tags (2.0.0)
+      actionpack (>= 3.0.0)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.6.0)
@@ -339,6 +346,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
+  friendly_id (~> 5.0.0)
   guard-bundler
   guard-rails
   guard-rspec
@@ -346,9 +354,11 @@ DEPENDENCIES
   hub
   jbuilder (~> 2.0)
   jquery-rails
+  kaminari
   launchy
   less-rails
   less-rails-bootstrap
+  meta-tags
   omniauth
   omniauth-facebook
   omniauth-stripe-connect

@@ -1,3 +1,11 @@
+<% content_for :description do %>
+  <%= @campaign.description %>
+<% end %>
+
+<% content_for :head do %>
+  <%= render 'social_meta' %>
+<% end %>
+
 
 <article style="">
   <h1>
@@ -47,12 +55,19 @@
           <span class="input-group-addon">$</span>
             <%= number_field_tag :amount, number_with_precision(@campaign.price, :precision => 2), :class=> "form-control", :width => "50%", :min => number_with_precision(@campaign.price, :precision => 2), :step => 1 %>
         </div>
-
-        <br/><br/>
-        <%#= label :image, "Image : " %>
-        <%= file_field_tag "image" , :class => "btn btn-default" %>
-        <p class="help-block">Select a photo relevant to this campaign.</p>
-        <%= hidden_field_tag :campaign_id, @campaign.id %>
+        <br/>
+        <div class="clearfix">
+          <div class="pull-left">
+          <%= file_field_tag "image" , :class => "btn btn-default" %>
+          <p class="help-block">Select a photo relevant to this campaign (optional).</p>
+          <%= hidden_field_tag :campaign_id, @campaign.id %>
+          </div>
+          <div class="pull-left" style="margin-left: 20px;">
+            <%= label :url, "Url : " %>
+            <%= text_field_tag :url %>
+            <p class="help-block">(Optional)</p>
+          </div>
+        </div>
         <br/>
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= @campaign.user.stripe_publishable_key %>"
@@ -63,25 +78,24 @@
       <% end %>
       </div>
   </div>
-    <% if @campaign.photos.where(:hidden => false) !=  [] %>
+    <%# if @photos.where(:hidden => false) !=  [] %>
       <h3>Photos</h3>
       <hr/>
-      <% @campaign.photos.where(:hidden => false).reverse.each do |photo| %>
+      <% @photos.reverse.each do |photo| %>
         <div class="col-md-4 pull-left text-center">
-          <%= link_to image_tag(photo.image.url(), :class => "img-rounded pull-left thumbnail", :width => "200px"), photo %>
+          <%= link_to image_tag(photo.image.url(), :class => "img-rounded pull-left thumbnail", :width => "200px"), campaign_photo_path(:slug => @campaign.slug, :id => photo.id) %>
           <br/>
           <p class="pull-left">
-            <h3><%= link_to photo.title|| "View", photo, :class => "btn btn-sm btn-default" %></h3>
+            <h3><%= link_to photo.title|| "View", campaign_photo_path(:slug => @campaign.slug, :id => photo.id), :class => "btn btn-sm btn-default" %></h3>
           </p>
         </div>
-
       <% end %>
-    <% end %>
+      <%= paginate @photos %>
+    <%# end %>
 
   </div>
 
   <div class="pull-left col-md-4">
-
   <p>
 
        <%= cl_image_tag(@campaign.image.url().split("/").last,  :transformation=>[

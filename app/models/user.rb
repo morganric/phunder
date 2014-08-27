@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :campaigns
   has_many :photos
 
+  paginates_per 10
+
   validates_exclusion_of :name, :in => %w( sign_in message discussions facebook tedx featured users feeds photos videos items admin oembed api facebook new popular featured favicon superuser 
     pages partners categories category creators platforms media posts authors types providers tagged ), :message => "You don't belong here"
 

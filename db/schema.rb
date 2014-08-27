@@ -11,9 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20140826123857) do
-
+ActiveRecord::Schema.define(version: 20140827175007) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -29,7 +27,23 @@ ActiveRecord::Schema.define(version: 20140826123857) do
     t.date     "end_date"
     t.string   "hashtag"
     t.string   "water_mark"
+    t.string   "slug"
   end
+
+  add_index "campaigns", ["slug"], name: "index_campaigns_on_slug", unique: true
+
+  create_table "friendly_id_slugs", force: true do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "photos", force: true do |t|
     t.string   "title"

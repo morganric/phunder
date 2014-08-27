@@ -22,6 +22,10 @@ class CampaignsController < ApplicationController
       Stripe.api_key = Rails.configuration.stripe[:secret_key]
       # Stripe.api_key = @campaign.user.stripe_secret_key
 
+      @photos = @campaign.photos.where(:hidden => false)
+
+      @photos = Kaminari.paginate_array(@photos).page(params[:page]).per(9)
+
   end
 
   # GET /campaigns/new
@@ -78,7 +82,7 @@ class CampaignsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_campaign
-      @campaign = Campaign.find(params[:id])
+      @campaign = Campaign.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
