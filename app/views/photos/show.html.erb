@@ -18,9 +18,11 @@
 	</h2>
 	<hr/>
 	<div class="col-md-4 row">
+		<%= button_to "Donate", @photo.campaign, :class => "btn btn-success btn-lg btn-block", :method => :get %>
+		<br/>
 		<div class="panel panel-default">
 		    <div class="panel-heading">
-			    <h3>Stats</h3>
+			    <h4>Stats</h4>
 		    </div>
 		    <div class="panel-body">
 		    	<h4>
@@ -36,12 +38,12 @@
 		
 		<div class="panel panel-default">
 	    <div class="panel-heading">
-	           <h3>
+	           <h4>
 	              Share
-	            </h3>
+	            </h4>
 	        </div>
 	        <div class="panel-body">
-			<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook', 'pinterest'], :facebook=> {:send=> 'true', :url=> '#{photo_url(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => "New Photo: #{@photo.title} for the #{@photo.campaign.name}3 campaign - ", :hashtags => @photo.campaign.hashtag }  %>
+			<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook'], :facebook=> {:send=> 'true', :url=> '#{photo_url(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => "New Photo: #{@photo.title} for the #{@photo.campaign.name}3 campaign - ", :hashtags => @photo.campaign.hashtag }  %>
 			</div>
 		</div>
 		<% if current_user && current_user.admin? %>

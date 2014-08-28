@@ -22,7 +22,7 @@ class CampaignsController < ApplicationController
       Stripe.api_key = Rails.configuration.stripe[:secret_key]
       # Stripe.api_key = @campaign.user.stripe_secret_key
 
-      @photos = @campaign.photos.where(:hidden => false)
+      @photos = @campaign.photos.where(:hidden => false).order('views DESC')
 
       @photos = Kaminari.paginate_array(@photos).page(params[:page]).per(9)
 

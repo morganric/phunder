@@ -81,12 +81,15 @@
     <%# if @photos.where(:hidden => false) !=  [] %>
       <h3>Photos</h3>
       <hr/>
-      <% @photos.reverse.each do |photo| %>
+      <% @photos.each do |photo| %>
         <div class="col-md-4 pull-left text-center">
           <%= link_to image_tag(photo.image.url(), :class => "img-rounded pull-left thumbnail", :width => "200px"), campaign_photo_path(:slug => @campaign.slug, :id => photo.id) %>
           <br/>
           <p class="pull-left">
             <h3><%= link_to photo.title|| "View", campaign_photo_path(:slug => @campaign.slug, :id => photo.id), :class => "btn btn-sm btn-default" %></h3>
+            <label class="label label-info">
+              <i class="glyphicon glyphicon-eye-open"></i> <%= photo.views %> Views
+            </label>
           </p>
         </div>
       <% end %>
@@ -111,12 +114,12 @@
   <br/>
   <div class="panel panel-default">
     <div class="panel-heading">
-           <h3>
+           <h4>
               Share
-            </h3>
+            </h4>
         </div>
         <div class="panel-body">
-        <%= render_shareable :turbolinks => true, :buttons => ['facebook', 'twitter', 'pinterest'], :facebook=> {:send=> 'true', :url=> '#{campaign_path(@campaign)}'}, :twitter => {:via => 'phunderapp', :text  => "Support the #{@campaign.name} campaign - ", :hashtags => @campaign.hashtag } %>
+        <%= render_shareable :turbolinks => true, :buttons => ['facebook', 'twitter'], :facebook=> {:send=> 'true', :url=> '#{campaign_path(@campaign)}'}, :twitter => {:via => 'phunderapp', :text  => "Support the #{@campaign.name} campaign - ", :hashtags => @campaign.hashtag } %>
         </div>
     </div>
     <% if current_user && current_user.admin? || current_user == @campaign.user %>
