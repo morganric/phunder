@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827175007) do
+ActiveRecord::Schema.define(version: 20140828142531) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(version: 20140827175007) do
   end
 
   add_index "campaigns", ["slug"], name: "index_campaigns_on_slug", unique: true
+
+  create_table "donations", force: true do |t|
+    t.integer  "amount"
+    t.string   "stripe_email"
+    t.integer  "user_id"
+    t.integer  "campaign_id"
+    t.integer  "photo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false

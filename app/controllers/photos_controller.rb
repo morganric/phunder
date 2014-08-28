@@ -36,6 +36,14 @@ class PhotosController < ApplicationController
 		  @photo.paid = @amount
 		  @photo.save
 
+		  @donation = Donation.new()
+		  @donation.amount = @amount
+		  @donation.stripe_email = params[:stripeEmail]
+		  @donation.photo_id = @photo.id
+		  @donation.user_id = current_user.id
+		  @donation.campaign_id = params[:campaign_id].to_i
+		  @donation.save
+
 		  customer = Stripe::Customer.create(
 		    :email => params[:stripeEmail],
 		    :card  => params[:stripeToken]
