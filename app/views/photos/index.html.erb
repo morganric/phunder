@@ -1,6 +1,7 @@
 <h1>Photos<h1/>
-
+<div class="row col-md-12">
 <% @photos.reverse.each do |photo| %>
-	<%= link_to photo, photo %>
-
+	<div class="col-md-3">
+	<%= link_to image_tag(photo.image.url(:square), :class=>"thumbnail pull-left"), photo %>
+	</div>
 <% end %>
