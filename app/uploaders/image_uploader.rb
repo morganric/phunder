@@ -24,7 +24,7 @@ class ImageUploader < CarrierWave::Uploader::Base
     # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   
     # "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-    "http://res.cloudinary.com/phunder-app/image/upload/v1408612470/lightning-logo_black.png"
+    "http://res.cloudinary.com/phunder-app/image/upload/v1409224318/logo-flash_default.png"
   end
 
   # Process files as they are uploaded:

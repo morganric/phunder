@@ -33,6 +33,7 @@ gem 'twitter-bootswatch-rails-helpers'
 gem 'meta-tags'
 gem 'kaminari'
 gem 'friendly_id', '~> 5.0.0'
+gem 'panda', '~> 1.6.0'
 
 group :development do
   gem 'better_errors'

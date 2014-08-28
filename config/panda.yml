@@ -1,0 +1,6 @@
+development:
+            access_key: Your Panda access key
+            secret_key: Your Panda secret key
+            cloud_id: Your Panda cloud id
+            # Uncomment the line below if your panda account is in the EU
+            # api_host: api-eu.pandastream.com

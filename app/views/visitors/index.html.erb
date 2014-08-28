@@ -56,10 +56,12 @@
 						<div class="col-md-8">
 						<div class="well pull-left">
 						<%= truncate(campaign.description, :length => 200) %>
+						<br/>
+						<%= link_to "Read More", campaign, :class=> "btn btn-xs btn-default pull-right" %>
 						</div>
 						<ul class='clearfix' >
-						    <% campaign.photos.where(:hidden => false).limit(10).each do |photo| %>
-						      <%= link_to image_tag(photo.image.url(:thumb), :class => "pull-left thumbnail img-rounded", :style => "margin-right:10px; border: 2px, solid grey;"), photo %>
+						    <% campaign.photos.where(:hidden => false).limit(10).reverse.each do |photo| %>
+						      <%= link_to image_tag(photo.image.url(:thumb), :class => "pull-left thumbnail img-rounded", :style => "margin-right:10px; border: 2px, solid grey;"), campaign_photo_path(:slug => campaign.slug, :id => photo.id) %>
 						    <% end %>
 						 </ul>  
 						 <%= button_to "Donate", campaign, :class => "btn btn-success btn-lg btn-block", :method => :get %>
