@@ -9,9 +9,7 @@
 
 <article style="">
   <h1>
-    <%= @campaign.name.split.map(&:capitalize).join(' ') %>
-    (#<%= @campaign.hashtag %>) 
-      <span class="pull-right">
+  <span class="pull-right">
       <p class="label label-success">
         <strong>Target:
           $<%= @campaign.target %>
@@ -20,7 +18,10 @@
       <p class="label label-info">
         <strong><%= @campaign.percent %>%</strong>
       </p>
-      </span>
+  </span>
+  
+    <%= @campaign.name.split.map(&:capitalize).join(' ') %>
+    (#<%= @campaign.hashtag %>) 
   <br/>
    <small>
   <% if @campaign.user.name != nil %>
@@ -103,10 +104,10 @@
 
        <%= cl_image_tag(@campaign.image.url().split("/").last,  :transformation=>[
         {:width=>400, :crop=>:scale},
-        {:opacity=>60, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:north_west, :flags=>:relative, :x=>5, :y=>5},
-        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west},
-         {:opacity=>90, :overlay=> @campaign.water_mark.url(:water_mark).split("/").last, :crop=>:scale, :gravity=>:north_east, :flags=>:relative, :x=>5, :y=>5, :size => "50"},
-        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:%23#{@campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east}
+        {:opacity=>50, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:north_west, :flags=>:relative, :x=>5, :y=>5},
+        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west, :opacity => 50},
+         {:opacity=>50, :overlay=> @campaign.water_mark.url(:water_mark).split("/").last, :crop=>:scale, :gravity=>:north_east, :flags=>:relative, :x=>5, :y=>5, :size => "50"},
+        {:color=>"#191919", :overlay=>"text:Helvetica_20_bold:%23#{@campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east, :opacity => 50}
         ], :class=>"img-rounded thumbnail", :width => "360px") %>
 
 

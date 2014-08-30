@@ -43,7 +43,7 @@
 	            </h4>
 	        </div>
 	        <div class="panel-body">
-			<%= render_shareable :turbolinks => true, :buttons => ['twitter', 'facebook'], :facebook=> {:send=> 'true', :url=> '#{photo_url(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => "New Photo: #{@photo.title} for the #{@photo.campaign.name}3 campaign - ", :hashtags => @photo.campaign.hashtag }  %>
+			<%= render_shareable :turbolinks => true, :buttons => ['facebook', 'twitter'], :facebook=> {:send=> 'true', :url=> '#{photo_url(@photo)}'}, :twitter => {:via => 'phunderapp', :text  => "New Photo: #{@photo.title} for the #{@photo.campaign.name} @phunderapp campaign - ", :hashtags => @photo.campaign.hashtag }  %>
 			</div>
 		</div>
 		<% if current_user && current_user.admin? %>
@@ -57,10 +57,10 @@
 		<div class="clearfix">
 		<%= link_to cl_image_tag(@photo.image.url().split("/").last,  :transformation=>[
         {:width=>400, :crop=>:scale},
-        {:opacity=>80, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:north_west, :flags=>:relative, :x=>5, :y=>5},
-        {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west},
-        {:opacity=>90, :overlay=> @photo.campaign.water_mark.url(:water_mark).split("/").last, :crop=>:scale, :gravity=>:north_east, :flags=>:relative, :x=>5, :y=>5, :size => "50"},
-        {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:%23#{@photo.campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east}
+        {:opacity=>50, :overlay=>"lightning-logo_black", :crop=>:scale, :gravity=>:north_west, :flags=>:relative, :x=>5, :y=>5},
+        {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:@phunderapp", :x=>10, :y=>5, :gravity=>:south_west, :opacity => 50},
+        {:opacity=>50, :overlay=> @photo.campaign.water_mark.url(:water_mark).split("/").last, :crop=>:scale, :gravity=>:north_east, :flags=>:relative, :x=>5, :y=>5, :size => "50"},
+        {:color=>"#303030", :overlay=>"text:Helvetica_20_bold:%23#{@photo.campaign.hashtag}", :x=>10, :y=>5, :gravity=>:south_east, :opacity => 50}
         ], :class=>"pull-left thumbnail"), @photo.url, :target => "_blank" %>
 
         </div>
