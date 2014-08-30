@@ -47,12 +47,17 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   version :square do
     process :convert => 'jpg'
-    process :resize_to_fill => [300, 300]
+    process :resize_to_fill => [300, 300, 'north']
   end
 
   version :banner do
     process :convert => 'jpg'
-    process :resize_to_fit => [1280, 200]
+    process :resize_to_fill => [1280, 200]
+  end
+
+  version :background do
+    process :convert => 'jpg'
+    process :resize_to_fit => [1280, 1200]
   end
 
   version :water_mark do

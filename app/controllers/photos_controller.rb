@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
-	before_filter :authenticate_user!, except: [:show, :index]	
+	before_filter :authenticate_user!, except: [:show, :index, :create]	
+	after_action :donation_email, only: :create
 
 
 	def index
@@ -40,7 +41,9 @@ class PhotosController < ApplicationController
 		  @donation.amount = @amount
 		  @donation.stripe_email = params[:stripeEmail]
 		  @donation.photo_id = @photo.id
-		  @donation.user_id = current_user.id
+		  if current_user
+			  @donation.user_id = current_user.id
+		  end
 		  @donation.campaign_id = params[:campaign_id].to_i
 		  @donation.save
 
@@ -76,6 +79,12 @@ class PhotosController < ApplicationController
         format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def donation_email
+  	@campaign = Campaign.find(params[:campaign_id].to_i)
+      UserMailer.donation_email(@campaign.user, @campaign, @photo).deliver
+      UserMailer.donation_email(User.third, @campaign, @photo).deliver
   end
 
 

@@ -18,11 +18,11 @@
 	</h2>
 	<hr/>
 	<div class="col-md-4 row">
-		<%= button_to "Donate", @photo.campaign, :class => "btn btn-success btn-lg btn-block", :method => :get %>
+		<%= button_to "Donate & Upload", @photo.campaign, :class => "btn btn-success btn-lg btn-block", :method => :get %>
 		<br/>
 		<div class="panel panel-default">
 		    <div class="panel-heading">
-			    <h4>Stats</h4>
+			    <h4>Photo Stats</h4>
 		    </div>
 		    <div class="panel-body">
 		    	<h4>
@@ -85,8 +85,7 @@
 
 <style type="text/css">
   body {
-    background-image: url(<%= @photo.campaign.banner.url %>);
-    background-size: cover;
+     background-image: url("<%= @photo.campaign.banner.url(:background) %>");
   }
 
 </style>

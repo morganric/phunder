@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Congratulations <%= @user.name %></h1>
+    <p>
+      You have successfully recieved a donation to your <%= @campaign.name.capitalize %> campaign.
+      <br>
+    </p>
+    <p>
+      <%= link_to "View Donation",  campaign_photo_url(:slug => @campaign.slug, :id => @photo.id) %>.
+    </p>
+    <p>Keep promoting your campaign!</p>
+  </body>
+</html>

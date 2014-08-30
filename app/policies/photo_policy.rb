@@ -19,7 +19,7 @@ class PhotoPolicy
   end
 
   def create?
-    @user.admin?
+    true
   end
 
   def edit?
