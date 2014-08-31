@@ -16,6 +16,16 @@ class Campaign < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  def views
+    @views = 0
+
+    self.photos.each do |photo|
+      @views = @views + photo.views
+    end
+
+    return @views
+  end
+
   def percent
       running = 0
       self.photos.each do |photo| 
