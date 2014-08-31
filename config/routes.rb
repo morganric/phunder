@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :photos
 
   get 'pages/about' => 'high_voltage/pages#show', id: 'about'
+  get "/tagged/:id" => "campaigns#tag", :as => :tagged_posts
 
   devise_for :users,  :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
   # devise_for :users

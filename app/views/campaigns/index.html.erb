@@ -3,9 +3,12 @@
   <ul>
     <% @campaigns.each do |campaign| %>
         <li>
-        	<h3>
+        	<%= link_to image_tag(campaign.image.url(:square), :class => "pull-left"), campaign %>
+        	<h2>
         	<%= link_to campaign.name, campaign %>
-        	</h3>
+        	</h2>
+        	<hr/>
+        	
         </li>
     <% end %>
   </ul>

@@ -28,6 +28,13 @@ class CampaignsController < ApplicationController
 
   end
 
+  def tag
+    @campaigns = Campaign.tagged_with(params[:id]).page(params[:all])
+
+    @tags = Campaign.tag_counts_on(:tags)
+    render :action => 'index'
+  end
+
   # GET /campaigns/new
   def new
     @campaign = Campaign.new
@@ -88,6 +95,6 @@ class CampaignsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def campaign_params
       params.require(:campaign).permit(:name, :description, :user_id, :target,
-       :live, :price, :image, :banner, :end_date, :hashtag, :water_mark)
+       :live, :price, :image, :banner, :end_date, :hashtag, :water_mark, :tag_list)
     end
 end
