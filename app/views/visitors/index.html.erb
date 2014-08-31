@@ -32,7 +32,7 @@
 					<div class="clearfix">
 						<h2 class="col-md-12">
 							<%= link_to campaign.name.split.map(&:capitalize).join(' '), campaign %>
-							<small>by <%= campaign.user.name %>
+							<small>by <%= link_to campaign.user.name, profile_path(campaign.user) %>
 							
 							<label class="label label-info pull-right" ><%= campaign.percent %>%</label>
 							<label class="label label-success pull-right" >$<%= campaign.target %></label>

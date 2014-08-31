@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :profiles
+
   resources :campaigns
   resources :charges
   resources :photos

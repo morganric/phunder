@@ -1,9 +1,15 @@
 class User < ActiveRecord::Base
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
+  after_create :create_profile
 
   def set_default_role
     self.role ||= :user
+  end
+
+   def create_profile
+    @profile = Profile.new(:user_id => id)
+    @profile.save
   end
 
   # Include default devise modules. Others available are:
@@ -14,6 +20,7 @@ class User < ActiveRecord::Base
 
   has_many :campaigns
   has_many :photos
+  has_one :profile
 
   paginates_per 10
 
@@ -28,7 +35,7 @@ class User < ActiveRecord::Base
         user.email = auth.info.email
         user.password = Devise.friendly_token[0,20]
         user.name = auth.info.name   # assuming the user model has a name
-        # user.profile.image = auth.info.image # assuming the user model has an image
+        user.profile.image_url = auth.info.image # assuming the user model has an image
       end
   end
   

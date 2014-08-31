@@ -25,7 +25,7 @@
   <br/>
    <small>
   <% if @campaign.user.name != nil %>
-    by <%= @campaign.user.name %>
+    by <%= link_to @campaign.user.name, profile_path(@campaign.user) %>
     <% end %>
     </small>
   </h1>

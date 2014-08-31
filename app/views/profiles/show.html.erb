@@ -1,0 +1,39 @@
+
+<h1><%= @profile.user.name %></h1>
+
+<div class="col-md-12 row" >
+  <div class="col-md-8">
+    <div class="well">
+      <%= @profile.bio %>
+      </div>
+      <h3> Photos </h3>
+      <ul> 
+        <% @profile.user.photos.each do |photo| %>
+          <li class="pull-left"><%= link_to image_tag(photo.image.url(:square), :class => "thumbnail"), photo.campaign %></li>
+        <% end %>
+      </ul>
+  </div>
+  <div class="col-md-4" >
+      <%= image_tag(@profile.image_url) %>
+
+<p>
+  <strong>Date of birth:</strong>
+  <%= @profile.date_of_birth %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @profile.location %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @profile.website %>
+</p>
+
+</div>
+
+
+<% if current_user && current_user == @profile.user || current_user && current_user.admin? %>
+<%= link_to 'Edit', edit_profile_path(@profile), :class => "btn btn-sm btn-default pull-right" %>
+<% end %>

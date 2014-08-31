@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140831095145) do
+ActiveRecord::Schema.define(version: 20140831164113) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -67,6 +67,18 @@ ActiveRecord::Schema.define(version: 20140831095145) do
     t.integer  "clicks",      default: 0
     t.integer  "views",       default: 0
     t.string   "url"
+  end
+
+  create_table "profiles", force: true do |t|
+    t.integer  "user_id"
+    t.text     "bio"
+    t.string   "image"
+    t.string   "image_url"
+    t.date     "date_of_birth"
+    t.string   "location"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "taggings", force: true do |t|
