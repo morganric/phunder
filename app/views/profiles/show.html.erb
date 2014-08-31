@@ -9,29 +9,38 @@
     <div class="well">
       <%= @profile.bio %>
       </div>
-      <h3> Photos </h3>
-      <ul> 
-        <% @profile.user.photos.each do |photo| %>
-          <li class="pull-left"><%= link_to image_tag(photo.image.url(:square), :class => "thumbnail"), photo.campaign %></li>
-        <% end %>
+
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#photos" role="tab" data-toggle="tab">Photos (<%= @profile.user.photos.count %>)</a></li>
+        <li><a href="#campaigns" role="tab" data-toggle="tab">Campaigns (<%= @profile.user.campaigns.count %>)</a></li>
       </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="photos">
+            <ul> 
+              <% @profile.user.photos.each do |photo| %>
+                <li class="pull-left"><%= link_to image_tag(photo.image.url(:square), :class => "thumbnail"), photo.campaign %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="tab-pane" id="campaigns">
+            <ul> 
+              <% @profile.user.campaigns.each do |campaign| %>
+                <li class="pull-left"><%= link_to image_tag(campaign.image.url(:square), :class => "thumbnail"), campaign %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
   </div>
   <div class="col-md-4" >
     <%= image_tag(@profile.fb_image_url || @profile.image.url, :class => "img-circle") %>
 
     <p>
-      <strong>Date of birth:</strong>
-      <%= @profile.date_of_birth %>
-    </p>
-
-    <p>
-      <strong>Location:</strong>
       <%= @profile.location %>
     </p>
 
     <p>
-      <strong>Website:</strong>
-      <%= @profile.website %>
+      <%= link_to @profile.website, @profile.website, :target => "_blank" %>
     </p>
 
 </div>
