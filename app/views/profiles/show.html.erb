@@ -1,7 +1,7 @@
 
 <h1>
   <%= @profile.user.name %>
-  <small><%= @profile.image_url %></small>
+  <small><%= @profile.fb_image_url %></small>
 </h1>
 
 <div class="col-md-12 row" >
@@ -37,6 +37,6 @@
 </div>
 
 
-<% if current_user && current_user == @profile.user || current_user && current_user.admin? %>
+<% if current_user && current_user == @profile.user or current_user && current_user.admin? %>
 <%= link_to 'Edit', edit_profile_path(@profile), :class => "btn btn-sm btn-default pull-right" %>
 <% end %>

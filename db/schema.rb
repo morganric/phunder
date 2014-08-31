@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140831164113) do
+ActiveRecord::Schema.define(version: 20140831171611) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -79,6 +79,9 @@ ActiveRecord::Schema.define(version: 20140831164113) do
     t.string   "website"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "display_name"
+    t.string   "fb_image_url"
+    t.string   "slug"
   end
 
   create_table "taggings", force: true do |t|
