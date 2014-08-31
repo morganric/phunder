@@ -1,5 +1,5 @@
 class CampaignsController < ApplicationController
-  before_filter :authenticate_user!, except: [:show, :index :tag]
+  before_filter :authenticate_user!, except: [:show, :index, :tag]
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
   require 'rails_autolink'
 
