@@ -1,5 +1,8 @@
 
-<h1><%= @profile.user.name %></h1>
+<h1>
+  <%= @profile.user.name %>
+  <small><%= @profile.image_url %></small>
+</h1>
 
 <div class="col-md-12 row" >
   <div class="col-md-8">
@@ -14,22 +17,22 @@
       </ul>
   </div>
   <div class="col-md-4" >
-      <%= image_tag(@profile.image_url) %>
+    <%= image_tag(@profile.image_url) %>
 
-<p>
-  <strong>Date of birth:</strong>
-  <%= @profile.date_of_birth %>
-</p>
+    <p>
+      <strong>Date of birth:</strong>
+      <%= @profile.date_of_birth %>
+    </p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @profile.location %>
-</p>
+    <p>
+      <strong>Location:</strong>
+      <%= @profile.location %>
+    </p>
 
-<p>
-  <strong>Website:</strong>
-  <%= @profile.website %>
-</p>
+    <p>
+      <strong>Website:</strong>
+      <%= @profile.website %>
+    </p>
 
 </div>
 
