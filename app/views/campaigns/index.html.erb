@@ -1,15 +1,32 @@
-<h1>All Campaigns</h1>
-
-  <ul>
+<h1>
+All Campaigns
+<br/>
+	<% if params[:id] %>
+	<small>
+		Tagged: <%= params[:id] %>
+	</small>
+	<% end %>
+</h1>
+<hr/>
+<div class="clearfix row">
     <% @campaigns.each do |campaign| %>
-        <li>
-        	<%= link_to image_tag(campaign.image.url(:square), :class => "pull-left"), campaign %>
-        	<h2>
-        	<%= link_to campaign.name, campaign %>
-        	</h2>
-        	<hr/>
-        	
-        </li>
+        	<div class="col-md-4">
+        	<%= link_to image_tag(campaign.image.url(), :class => "pull-left thumbnail img-rounded"), campaign %>
+        	</div>
+        	<div class="col-md-8">
+	        	<h3>
+	        	<%= link_to campaign.name, campaign %>
+	        	</h3>
+	        	<p class="well">
+		        	<%= campaign.description %>
+		        </p>
+		        <ul class='clearfix pull-left' >
+						    <% campaign.photos.where(:hidden => false).limit(10).reverse.each do |photo| %>
+						      <%= link_to image_tag(photo.image.url(:thumb), :class => "pull-left thumbnail img-rounded", :style => "margin-right:10px; border: 2px, solid grey;"), campaign_photo_path(:slug => campaign.slug, :id => photo.id) %>
+						    <% end %>
+				 </ul>  
+		        <%= button_to "Donate", campaign, :class => "btn btn-success btn-lg btn-block", :method => :get %>
+        	</div>
     <% end %>
-  </ul>
+</div>
 
