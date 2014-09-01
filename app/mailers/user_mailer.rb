@@ -1,7 +1,8 @@
 class UserMailer < ActionMailer::Base
   default from: "phunderapp@gmail.com"
 
-  def donation_email(user, campaign, photo)
+  def donation_email(email, user, campaign, photo)
+    @email = email
     @user = user
     @campaign = campaign
     @photo = photo

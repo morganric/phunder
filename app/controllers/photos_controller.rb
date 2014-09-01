@@ -89,8 +89,8 @@ class PhotosController < ApplicationController
 
   def donation_email
   	@campaign = Campaign.find(params[:campaign_id].to_i)
-      UserMailer.donation_email(@campaign.user, @campaign, @photo).deliver
-      UserMailer.donation_email(User.third, @campaign, @photo).deliver
+      UserMailer.donation_email(@campaign.user.email, @campaign.user @campaign, @photo).deliver
+      UserMailer.donation_email("phunderapp@gmail.com", User.first, @campaign, @photo).deliver
   end
 
 
