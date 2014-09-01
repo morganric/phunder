@@ -26,8 +26,8 @@ class PhotosController < ApplicationController
 
 		  @amount = params[:amount].to_i
 
-		  if @ammount < 2
-		  	@ammount = 2
+		  if @amount < 2
+		  	@amount = 2
 		  end
 
 		  @photo = Photo.new()
