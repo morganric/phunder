@@ -28,7 +28,7 @@ class Campaign < ActiveRecord::Base
 
   def percent
       running = 0
-      self.photos.each do |photo| 
+      self.photos.where(:hidden => false).each do |photo| 
         running = running + photo.paid
       end
 
