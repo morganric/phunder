@@ -63,13 +63,13 @@ class PhotosController < ApplicationController
 		    :currency    => 'usd'
 		  )
 
-		redirect_to :back
+		redirect_to photo_path(@photo)
 
 		rescue Stripe::CardError => e
 		  flash[:error] = e.message
-		  redirect_to charges_path
+		  redirect_to photo_path(@photo)
 
-		 redirect_to photo_path(@photo)
+		 redirect_to :back
 	end
 
 
