@@ -26,6 +26,10 @@ class PhotosController < ApplicationController
 
 		  @amount = params[:amount].to_i
 
+		  if @ammount < 2
+		  	@ammount = 2
+		  end
+
 		  @photo = Photo.new()
 		  if current_user
 			  @photo.user_id = current_user.id
@@ -59,11 +63,13 @@ class PhotosController < ApplicationController
 		    :currency    => 'usd'
 		  )
 
+		redirect_to :back
+
 		rescue Stripe::CardError => e
 		  flash[:error] = e.message
 		  redirect_to charges_path
 
-		 redirect_to :back
+		 redirect_to photo_path(@photo)
 	end
 
 
