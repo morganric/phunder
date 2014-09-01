@@ -19,7 +19,7 @@ class Campaign < ActiveRecord::Base
   def views
     @views = 0
 
-    self.photos.each do |photo|
+    self.photos.where(:hidden => false).each do |photo|
       @views = @views + photo.views
     end
 
