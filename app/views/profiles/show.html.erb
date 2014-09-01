@@ -19,16 +19,23 @@
         <div class="tab-pane active" id="photos">
             <ul> 
               <% @profile.user.photos.each do |photo| %>
-                <li class="pull-left"><%= link_to image_tag(photo.image.url(:square), :class => "thumbnail"), photo.campaign %></li>
+                <li class="pull-left"><%= link_to image_tag(photo.image.url(:small), :class => "thumbnail"), photo %></li>
               <% end %>
             </ul>
           </div>
           <div class="tab-pane" id="campaigns">
-            <ul> 
-              <% @profile.user.campaigns.each do |campaign| %>
-                <li class="pull-left"><%= link_to image_tag(campaign.image.url(:square), :class => "thumbnail"), campaign %></li>
+          <br/>
+            <% @profile.user.campaigns.each do |campaign| %>
+              <div class="clearfix col-md-12 row"> 
+                <div class="col-md-3 pull-left">
+                  <%= link_to image_tag(campaign.image.url(:small), :class => "thumbnail "), campaign %>
+                </div>
+                  <div class="col-md-9 pull-left">
+                  <h3><%= link_to campaign.name, campaign %></h3>
+                  <p class="well"> <%= truncate(campaign.description, length: 100) %></p>
+                  </div>
+                </div>
               <% end %>
-            </ul>
           </div>
         </div>
   </div>
@@ -40,7 +47,7 @@
     </p>
 
     <p>
-      <%= link_to @profile.website, @profile.website, :target => "_blank" %>
+      <%= link_to @profile.website, @profile.website, :target => "" %>
     </p>
 
 </div>

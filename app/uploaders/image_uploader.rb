@@ -45,10 +45,16 @@ class ImageUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [50, 50]
   end
 
+   version :small do
+    process :convert => 'jpg'
+    process :resize_to_fill => [150, 150, 'north']
+  end
+  
   version :square do
     process :convert => 'jpg'
     process :resize_to_fill => [300, 300, 'north']
   end
+
 
   version :banner do
     process :convert => 'jpg'
