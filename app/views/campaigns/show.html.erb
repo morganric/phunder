@@ -85,7 +85,7 @@
       <hr/>
       <% @photos.each do |photo| %>
         <div class="col-md-4 pull-left text-center">
-          <%= link_to image_tag(photo.image.url(:square), :class => "img-rounded pull-left thumbnail", :width => "200px"), campaign_photo_path(:slug => @campaign.slug, :id => photo.id) %>
+          <%= link_to cl_image_tag(photo.image.url(:square), :class => "img-rounded pull-left thumbnail", :width => "200px"), campaign_photo_path(:slug => @campaign.slug, :id => photo.id) %>
           <br/>
           <p class="pull-left">
             <h3><%= link_to "View", campaign_photo_path(:slug => @campaign.slug, :id => photo.id), :class => "btn btn-sm btn-default" %></h3>

@@ -72,7 +72,7 @@
 						<br/>
 						<ul class='clearfix pull-left' >
 						    <% campaign.photos.where(:hidden => false).limit(10).reverse.each do |photo| %>
-						      <%= link_to image_tag(photo.image.url(:thumb), :class => "pull-left thumbnail img-rounded", :style => "margin-right:10px; border: 2px, solid grey;"), campaign_photo_path(:slug => campaign.slug, :id => photo.id) %>
+						      <%= link_to cl_image_tag(photo.image.url(:thumb), :class => "pull-left thumbnail img-rounded", :style => "margin-right:10px; border: 2px, solid grey;"), campaign_photo_path(:slug => campaign.slug, :id => photo.id) %>
 						    <% end %>
 						 </ul>  
 						 <%= button_to "Donate", campaign, :class => "btn btn-success btn-lg btn-block", :method => :get %>
