@@ -7,7 +7,12 @@ ENV["MANDRILL_USERNAME"] = 'phunderapp@gmail.com'
 ENV["MANDRILL_APIKEY"] = '7jjl2jl1dDKLt4XQ0OFIEA'
 
 
-
+ENV['STRIPE_CONNECT_CLIENT_ID'] = "ca_4c9VP2RNtcp0qo9brfB4ZTYDkmvliIRu"
+ENV['STRIPE_SECRET'] = "sk_live_TCfKm3ectx6UGmmlZ6IsPOjF"
+ENV['SECRET_KEY'] = "sk_live_TCfKm3ectx6UGmmlZ6IsPOjF"
+ENV['PUBLISHABLE_KEY'] = "pk_live_VOYKQRcdWo47z77ei6VKhvTc"
+ENV['PUBLISHABLE_KEY'] = "pk_live_VOYKQRcdWo47z77ei6VKhvTc"
+ENV['SECRET_KEY'] = "sk_test_4Y3e9qy1NaVmuIwagWT8Bb55"
 
 
 Rails.application.configure do
